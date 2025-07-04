@@ -1,0 +1,41 @@
+.history-card {
+  background: #f5f5f5;
+  border-radius: 16px;
+  box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.18);
+  padding: 20px 28px;
+  margin-bottom: 0;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .history-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .history-card-sensor {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #0d5366;
+  }
+
+  .history-card-date {
+    font-size: 0.95rem;
+    color: #888;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .history-card-value {
+    font-size: 1.1rem;
+    color: #222;
+    span {
+      font-weight: 700;
+      color: #2e7d32;
+    }
+  }
+}
