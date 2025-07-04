@@ -1,0 +1,10 @@
+<div class="control-card">
+  <div class="card-content">
+    <div class="card-title">{{ title }}</div>
+    <div class="card-desc">{{ description }}</div>
+  </div>
+  <label class="switch">
+    <input class="input" type="checkbox" [checked]="checked" (change)="toggle()">
+    <span class="slider"></span>
+  </label>
+</div>

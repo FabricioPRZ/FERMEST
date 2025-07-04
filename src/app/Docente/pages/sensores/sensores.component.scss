@@ -1,0 +1,40 @@
+.dashboard-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #2e7d32;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.10);
+
+  .dashboard-title-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  
+}
+
+.top-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+app-control-card.wide {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}

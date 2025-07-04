@@ -1,0 +1,45 @@
+<h1 class="dashboard-title">
+  Sensores
+  <img class="dashboard-title-img" src="icons/sensor-1.png" alt="">
+</h1>
+<div class="top-cards">
+  <app-control-card
+    class="wide"
+    title="Manipulación de sensores"
+    description="Esto controla el encendido y apagado de todos los sensores en general, si desea apagar los sensores por separado busque el sensor que desea y presione el botón de apagado."
+    [checked]="true">
+  </app-control-card>
+  <app-control-card
+    class="wide"
+    title="Manipulación de bomba"
+    description="Esto controla el encendido y apagado de la bomba que se encuentra dentro del fermentador."
+    [checked]="false">
+  </app-control-card>
+</div>
+<div class="cards-grid">
+  <app-control-card
+    title="MQ3 - Alcohol"
+    description="Utilizado para detectar la producción de alcohol (etanol) durante el proceso de fermentación."
+    [checked]="true">
+  </app-control-card>
+  <app-control-card
+    title="DS18B20 - Temperatura"
+    description="Este sensor mide la temperatura interna del medio de fermentación."
+    [checked]="false">
+  </app-control-card>
+  <app-control-card
+    title="SEN0161 - PH"
+    description="Mide el nivel de acidez del medio durante la fermentación."
+    [checked]="true">
+  </app-control-card>
+  <app-control-card
+    title="SEN0189 - Turbidez"
+    description="Mide la claridad del líquido fermentado."
+    [checked]="false">
+  </app-control-card>
+  <app-control-card
+    title="SEN0244 - Conductividad"
+    description="Evalúa la cantidad de sales disueltas en la mezcla de biomasa."
+    [checked]="true">
+  </app-control-card>
+</div>
