@@ -1,0 +1,37 @@
+.main-header {
+  background: #fff;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.10);
+  width: 100%;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
+}
+
+.logo {
+  height: 60px;
+  margin-right: 2rem;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-menu-a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 700;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.3rem;
+  transition: color 0.2s;
+}
+
+.nav-menu-a:hover {
+  color: #388e3c;
+}
