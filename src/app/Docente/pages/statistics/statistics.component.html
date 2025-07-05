@@ -1,0 +1,16 @@
+<h1 class="dashboard-title">
+  Estadísticas de Sensores
+  <img class="dashboard-title-img" src="icons/estadisticas1.png" alt="">
+</h1>
+<div class="statistics-card">
+  <div class="sensor-tabs">
+    <button class="button-chart" routerLink="temperatura" routerLinkActive="active">Temperatura</button>
+    <button class="button-chart" routerLink="alcohol" routerLinkActive="active">Alcohol</button>
+    <button class="button-chart" routerLink="ph" routerLinkActive="active">pH</button>
+    <button class="button-chart" routerLink="turbidez" routerLinkActive="active">Turbidez</button>
+    <button class="button-chart" routerLink="conductividad" routerLinkActive="active">Conductividad</button>
+  </div>
+  <div class="chart-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

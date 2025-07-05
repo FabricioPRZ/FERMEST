@@ -16,7 +16,7 @@ export class SidebarComponent {
     this.router.navigate(['/dashboard-docente/inicio']);
   }
   goToEstadisticas() {
-    this.router.navigate(['/dashboard-docente/estadisticas']);
+    this.router.navigate(['/dashboard-docente/statistics']);
   }
   goToSensores() {
     this.router.navigate(['/dashboard-docente/sensores']);
