@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-control-card',
@@ -9,9 +9,12 @@ export class ControlCardComponent {
   @Input() title = '';
   @Input() description = '';
   @Input() checked = false;
+  @Input() device!: string; // id único del actuador / sensor
 
-  toggle() {
+  @Output() toggled = new EventEmitter<{ device: string; on: boolean }>();
+
+  toggle(): void {
     this.checked = !this.checked;
-    // Aquí puedes emitir un evento o llamar a un servicio
+    this.toggled.emit({ device: this.device, on: this.checked });
   }
 }

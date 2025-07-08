@@ -34,7 +34,6 @@ export class TemperatureChartComponent implements OnInit, OnDestroy {
   constructor(private notifService: NotificationService) {}
 
   ngOnInit(): void {
-    this.notifService.connect();
 
     this.sub = this.notifService.listenForNotifications().subscribe((msg: any) => {
       if (msg.sensor === 'temperatura') {

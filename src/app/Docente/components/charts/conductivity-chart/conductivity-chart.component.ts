@@ -34,7 +34,6 @@ export class ConductivityChartComponent implements OnInit, OnDestroy {
   constructor(private notifService: NotificationService) {}
 
   ngOnInit(): void {
-    this.notifService.connect(); // Conecta al WebSocket
 
     this.sub = this.notifService.listenForNotifications().subscribe((msg: any) => {
       if (msg.sensor === 'conductividad') {

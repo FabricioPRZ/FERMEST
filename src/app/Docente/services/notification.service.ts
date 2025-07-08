@@ -1,83 +1,77 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class NotificationService {
   private ws!: WebSocket;
   private isConnected = false;
+  private isConnecting = false;
 
-  connect(): void {
-    const userId = "1";
-    const sessionId = userId;
+  readonly userId = 1;
+  private readonly sessionId = this.userId;
 
-     this.ws = new WebSocket(`ws://34.196.95.251:8082/ws?user_id=${userId}&session_id=${sessionId}`);
+  private messages$ = new Subject<any>();
+
+  constructor() {
+    this.connect();
+  }
+
+  private connect(): void {
+    if (this.isConnected || this.isConnecting) return;
+
+    this.isConnecting = true;
+    this.ws = new WebSocket(
+      `ws://34.196.95.251:8082/ws?user_id=${this.userId}&session_id=${this.sessionId}`
+    );
 
     this.ws.onopen = () => {
-      console.log('WebSocket conectado');
+      console.log('✅ WebSocket conectado');
       this.isConnected = true;
-      this.registerUser(userId);
+      this.isConnecting = false;
+      this.registerUser();
     };
 
-    this.ws.onclose = () => {
-      console.log('WebSocket desconectado');
-      this.isConnected = false;
-    };
-
-    this.ws.onerror = (error) => {
-      console.error('Error en WebSocket:', error);
-    };
-  }
-
-  registerUser(userId: string) {
-    if (this.isConnected && this.ws.readyState === WebSocket.OPEN) {
-      const message = JSON.stringify({
-        action: 'registrarUsuario',
-        data: { clientId: userId, sessionId: userId }
-      });
-      this.ws.send(message);
-      console.log('Usuario registrado:', userId);
-    } else {
-      console.error('No conectado, no se puede registrar usuario');
-    }
-  }
-
-  listenForNotifications(): Observable<any> {
-  return new Observable<any>(observer => {
-    if (!this.ws) {
-      observer.error('WebSocket no conectado');
-      return;
-    }
-
-    this.ws.onmessage = (event) => {
+    this.ws.onmessage = ({ data }) => {
       try {
-        const data = JSON.parse(event.data);
-        observer.next(data);
-      } catch (err) {
-        console.error('Error al parsear mensaje:', err);
+        this.messages$.next(JSON.parse(data));
+      } catch (e) {
+        console.error('❌ Error al parsear mensaje:', e);
       }
     };
 
-    return () => {
-      this.ws?.close();
-      console.log('WebSocket cerrado desde Observable');
+    this.ws.onclose = ({ code }) => {
+      console.warn(`⚠️ WebSocket cerrado (código ${code}). Reintentando conexión en 3s...`);
+      this.isConnected = false;
+      this.isConnecting = false;
+
+      setTimeout(() => this.connect(), 3000);
     };
-  });
-}
 
-
-  sendMessage(message: string) {
-    if (this.isConnected && this.ws.readyState === WebSocket.OPEN) {
-      this.ws.send(message);
-    } else {
-      console.error('WebSocket no está conectado');
-    }
+    this.ws.onerror = err => {
+      console.error('❌ Error en WebSocket:', err);
+    };
   }
 
-  ngOnDestroy(): void {
-    if (this.ws) {
-      this.ws.close();
+  private registerUser() {
+    const payload = {
+      action: 'registrarUsuario',
+      data: { clientId: this.userId, sessionId: this.sessionId }
+    };
+    this.send(payload);
+    console.log('👤 Usuario registrado:', this.userId);
+  }
+
+  /** No cerrar el socket aquí */
+  listenForNotifications(): Observable<any> {
+    return this.messages$.asObservable();
+  }
+
+  send(message: string | object) {
+    if (this.isConnected && this.ws.readyState === WebSocket.OPEN) {
+      const msgStr = typeof message === 'string' ? message : JSON.stringify(message);
+      this.ws.send(msgStr);
+    } else {
+      console.warn('⏳ WebSocket no listo. Mensaje descartado o en reconexión.');
     }
   }
 }

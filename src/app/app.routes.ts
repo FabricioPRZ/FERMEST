@@ -13,7 +13,7 @@ import { TurbidityChartComponent } from './Docente/components/charts/turbidity-c
 import { ConductivityChartComponent } from './Docente/components/charts/conductivity-chart/conductivity-chart.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
 
