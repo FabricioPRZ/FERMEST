@@ -1,0 +1,108 @@
+.dashboard-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #1F730A;
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+  .dashboard-title-img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+  }
+}
+
+.dashboard-section {
+  margin-bottom: 64px;
+  max-width: 900px;      /* Controla el ancho máximo */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 16px;       /* Espacio horizontal para no pegar al borde */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;             /* Espacio entre elementos internos */
+}
+
+/* Secciones internas */
+.stats-preview,
+.sensor-cards-preview,
+.history-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+/* Botones de estadísticas */
+.stats-preview button.button-chart {
+  background: #1793b2;
+  border: none;
+  color: white;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 14px 28px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background 0.3s;
+
+  &:hover {
+    background: #146d8a;
+  }
+}
+
+/* Tarjetas sensores */
+.small-card {
+  flex: 1 1 280px;
+  min-width: 250px;
+  max-width: 340px;
+  box-sizing: border-box;
+}
+
+
+/* Contenedor historial */
+.history-preview {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 16px;
+  max-width: 100%;
+  overflow: visible;  /* Sin scroll */
+}
+
+/* Link "Ver más" */
+.view-more {
+  display: inline-block;
+  margin-top: 20px;
+  font-weight: 600;
+  color: #1793b2;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+
+  &:hover {
+    color: #0f5c73;
+  }
+}
+
+/* Título sección */
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #1F730A;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+}

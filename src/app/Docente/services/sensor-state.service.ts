@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 export type DeviceId =
   | 'alcohol' | 'temperatura' | 'ph' | 'turbidez'
@@ -17,8 +19,12 @@ export class SensorStateService {
     sensores: false,
   };
 
-  set(device: DeviceId, value: boolean) {
+  // BehaviorSubject para emitir cambios
+  private stateSubject = new BehaviorSubject<Record<DeviceId, boolean>>({ ...this.states });
+
+  set(device: DeviceId, value: boolean): void {
     this.states[device] = value;
+    this.stateSubject.next({ ...this.states }); // emite el nuevo estado global
   }
 
   get(device: DeviceId): boolean {
@@ -32,5 +38,9 @@ export class SensorStateService {
   areAllSensorsOn(): boolean {
     return ['alcohol', 'temperatura', 'ph', 'turbidez', 'conductividad']
       .every(d => this.states[d as DeviceId]);
+  }
+
+  observe(callback: (states: Record<DeviceId, boolean>) => void): Subscription {
+    return this.stateSubject.asObservable().subscribe(callback);
   }
 }

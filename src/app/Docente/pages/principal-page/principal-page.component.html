@@ -1,1 +1,62 @@
-<p>principal-page works!</p>
+<h1 class="dashboard-title">
+  Panel Principal
+  <img class="dashboard-title-img" src="icons/casa-1.png" alt="Ícono Dashboard" />
+</h1>
+
+<!-- Estadísticas -->
+<section class="dashboard-section">
+  <h2 class="section-title">
+    Estadísticas de Sensores
+    <img class="section-icon" src="icons/estadisticas1.png" alt="Ícono estadísticas" />
+  </h2>
+  <div class="stats-preview">
+    <button class="button-chart" routerLink="/dashboard-docente/statistics/temperatura">Temperatura</button>
+    <button class="button-chart" routerLink="/dashboard-docente/statistics/alcohol">Alcohol</button>
+    <button class="button-chart" routerLink="/dashboard-docente/statistics/ph">pH</button>
+    <button class="button-chart" routerLink="/dashboard-docente/statistics/turbidez">Turbidez</button>
+    <button class="button-chart" routerLink="/dashboard-docente/statistics/conductividad">Conductividad</button>
+  </div>
+</section>
+
+<!-- Sensores -->
+<section class="dashboard-section">
+  <h2 class="section-title">
+    Estado actual de Sensores
+    <img class="section-icon" src="icons/sensor-1.png" alt="Ícono sensores" />
+  </h2>
+
+  <!-- Las tarjetas de control reflejan el estado compartido -->
+  <div class="sensor-cards-preview">
+    <app-control-card
+        *ngFor="let device of devicesPreview"
+        [title]="device.title"
+        [description]="device.description"
+        [checked]="isChecked(device.id)"
+        [device]="device.id"
+        (toggled)="onToggle($event)"
+        class="small-card"
+    ></app-control-card>
+    </div>
+
+  <a class="view-more" routerLink="/dashboard-docente/sensores">Ver todos los sensores</a>
+</section>
+
+<!-- Historial -->
+<section class="dashboard-section">
+  <h2 class="section-title">
+    Últimos datos históricos
+    <img class="section-icon" src="icons/historial1.png" alt="Ícono historial" />
+  </h2>
+
+  <div class="history-preview">
+    <app-history-card
+      *ngFor="let item of recentHistory"
+      [sensorName]="item.sensorName"
+      [date]="item.date"
+      [value]="item.value"
+      class="small-card"
+    ></app-history-card>
+  </div>
+
+  <a class="view-more" routerLink="/dashboard-docente/history">Ver más historial</a>
+</section>

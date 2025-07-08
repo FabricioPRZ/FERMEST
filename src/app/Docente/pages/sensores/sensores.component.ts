@@ -1,4 +1,3 @@
-// src/app/features/sensores/sensores.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlCardComponent } from '../../components/control-card/control-card.component';
