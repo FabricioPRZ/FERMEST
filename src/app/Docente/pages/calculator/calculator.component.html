@@ -1,0 +1,53 @@
+<h1 class="dashboard-title">
+  Calculadora de Eficiencia
+  <img class="dashboard-title-img" src="icons/calculos-1.png" alt="Ícono cálculo" />
+</h1>
+
+<div class="calculator-box">
+  <form class="calculator-form" (ngSubmit)="false">
+    <div class="form-group">
+      <label class="form-label">Azúcar Inicial (g/L)</label>
+      <input
+        type="number"
+        class="form-input"
+        [(ngModel)]="azucarInicial"
+        name="azucar"
+        placeholder="Ej. 100"
+        min="1"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Etanol Detectado (g/L)</label>
+      <input
+        type="number"
+        class="form-input"
+        [(ngModel)]="etanolSensor"
+        name="etanol"
+        placeholder="Ej. 30"
+        min="0"
+        required
+      />
+    </div>
+
+    <div class="form-result">
+      <span class="form-result-span">Eficiencia actual:</span>
+      <strong class="form-result-strong">{{ eficiencia }}%</strong>
+
+      <div class="progress-container">
+        <div
+          class="progress-bar"
+          [ngStyle]="{
+            width: eficiencia + '%',
+            backgroundColor: getBarColor(eficiencia)
+          }"
+        ></div>
+      </div>
+    </div>
+
+    <div class="form-error" *ngIf="eficiencia > 100">
+      ⚠️ La eficiencia no puede ser mayor al 100%. Verifica los datos.
+    </div>
+  </form>
+</div>

@@ -11,6 +11,7 @@ import { AlcoholChartComponent } from './Docente/components/charts/alcohol-chart
 import { PhChartComponent } from './Docente/components/charts/ph-chart/ph-chart.component';
 import { TurbidityChartComponent } from './Docente/components/charts/turbidity-chart/turbidity-chart.component';
 import { ConductivityChartComponent } from './Docente/components/charts/conductivity-chart/conductivity-chart.component';
+import { CalculatorComponent } from './Docente/pages/calculator/calculator.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -34,6 +35,8 @@ export const routes: Routes = [
             },
             { path: 'sensores', component: SensoresComponent },
             { path: 'history', component:SensorsHistoryComponent},
+            { path: 'calculator', component: CalculatorComponent},
+            
         ]
     }
 ];

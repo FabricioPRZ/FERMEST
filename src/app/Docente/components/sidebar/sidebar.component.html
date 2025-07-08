@@ -1,7 +1,7 @@
 <nav class="sidebar-nav">
   <ul class="sidebar-list">
     <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-docente/inicio')}">
-      <a (click)="goToInicio()" class="sidebar-link">
+      <a (click)="goToInicio($event)" class="sidebar-link">
         <span class="sidebar-icon">
           <img class="sidebar-img" src="icons/casa.png" alt="">
         </span>
@@ -9,7 +9,7 @@
       </a>
     </li>
     <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-docente/statistics')}">
-      <a (click)="goToEstadisticas()" class="sidebar-link">
+      <a (click)="goToEstadisticas($event)" class="sidebar-link">
         <span class="sidebar-icon">
           <img class="sidebar-img" src="icons/estadisticas.png" alt="">
         </span>
@@ -17,7 +17,7 @@
       </a>
     </li>
     <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-docente/sensores')}">
-      <a (click)="goToSensores()" class="sidebar-link">
+      <a (click)="goToSensores($event)" class="sidebar-link">
         <span class="sidebar-icon">
           <img class="sidebar-img" src="icons/sensor.png" alt="">
         </span>
@@ -25,15 +25,15 @@
       </a>
     </li>
     <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-docente/history')}">
-      <a (click)="goToHistorial()" class="sidebar-link">
+      <a (click)="goToHistorial($event)" class="sidebar-link">
         <span class="sidebar-icon">
           <img class="sidebar-img" src="icons/historial.png" alt="">
         </span>
         <span class="sidebar-label">Historial</span>
       </a>
     </li>
-    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-docente/calculos')}">
-      <a (click)="goToCalculos()" class="sidebar-link">
+    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-docente/calculator')}">
+      <a (click)="goToCalculos($event)" class="sidebar-link">
         <span class="sidebar-icon">
           <img class="sidebar-img" src="icons/calculos.png" alt="">
         </span>
@@ -41,7 +41,7 @@
       </a>
     </li>
     <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-docente/fermentacion')}">
-      <a (click)="goToFermentacion()" class="sidebar-link">
+      <a (click)="goToFermentacion($event)" class="sidebar-link">
         <span class="sidebar-icon">
           <img class="sidebar-img" src="icons/fermentacion.png" alt="">
         </span>

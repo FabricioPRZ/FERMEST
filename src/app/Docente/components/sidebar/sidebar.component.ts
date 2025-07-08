@@ -12,22 +12,28 @@ import { CommonModule } from '@angular/common';
 export class SidebarComponent {
   constructor(public router: Router, public route: ActivatedRoute) {}
 
-  goToInicio() {
+  goToInicio(event: Event) {
+    event.preventDefault();
     this.router.navigate(['/dashboard-docente/inicio']);
   }
-  goToEstadisticas() {
+  goToEstadisticas(event: Event) {
+    event.preventDefault();
     this.router.navigate(['/dashboard-docente/statistics']);
   }
-  goToSensores() {
+  goToSensores(event: Event) {
+    event.preventDefault();
     this.router.navigate(['/dashboard-docente/sensores']);
   }
-  goToHistorial() {
+  goToHistorial(event: Event) {
+    event.preventDefault();
     this.router.navigate(['/dashboard-docente/history']);
   }
-  goToCalculos() {
-    this.router.navigate(['/dashboard-docente/calculos']);
+  goToCalculos(event: Event) {
+    event.preventDefault();
+    this.router.navigate(['/dashboard-docente/calculator']);
   }
-  goToFermentacion() {
+  goToFermentacion(event: Event) {
+    event.preventDefault();
     this.router.navigate(['/dashboard-docente/fermentacion']);
   }
 
