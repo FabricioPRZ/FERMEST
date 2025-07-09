@@ -33,7 +33,9 @@ export class NotificationService {
 
     this.ws.onmessage = ({ data }) => {
       try {
-        this.messages$.next(JSON.parse(data));
+        const parsed = JSON.parse(data);
+        console.log('📨 Mensaje recibido del WS:', parsed);
+        this.messages$.next(parsed);
       } catch (e) {
         console.error('❌ Error al parsear mensaje:', e);
       }
@@ -43,7 +45,6 @@ export class NotificationService {
       console.warn(`⚠️ WebSocket cerrado (código ${code}). Reintentando conexión en 3s...`);
       this.isConnected = false;
       this.isConnecting = false;
-
       setTimeout(() => this.connect(), 3000);
     };
 
@@ -61,7 +62,6 @@ export class NotificationService {
     console.log('👤 Usuario registrado:', this.userId);
   }
 
-  /** No cerrar el socket aquí */
   listenForNotifications(): Observable<any> {
     return this.messages$.asObservable();
   }
