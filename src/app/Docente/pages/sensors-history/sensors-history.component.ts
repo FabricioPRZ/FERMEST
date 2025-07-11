@@ -17,4 +17,12 @@ export class SensorsHistoryComponent {
     { sensorName: 'SEN0189 - Turbidez', date: new Date(), value: '120 NTU' },
     { sensorName: 'SEN0244 - Conductividad', date: new Date(), value: '1.2 mS/cm' }
   ];
+
+  refreshData() {
+    console.log('Actualizando datos...');
+  }
+
+  applyFilters() {
+    console.log('Aplicando filtros...');
+  }
 }
