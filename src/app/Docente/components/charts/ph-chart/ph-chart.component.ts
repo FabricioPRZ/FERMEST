@@ -6,8 +6,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-ph-chart',
   standalone: true,
   imports: [CommonModule, NgxEchartsModule],
-  template: `<div echarts [options]="chartOptions" class="chart"></div>`,
-  styleUrls: ['./ph-chart.component.scss']
+  styleUrls: ['./ph-chart.component.scss'],
+  templateUrl: './ph-chart.component.html', 
 })
 export class PhChartComponent {
   readonly chartOptions = {

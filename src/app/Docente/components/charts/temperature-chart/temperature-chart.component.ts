@@ -8,28 +8,13 @@ import { NotificationService } from '../../../services/notification.service';
   selector: 'app-temperature-chart',
   standalone: true,
   imports: [CommonModule, NgxEchartsModule],
-  template: `
-    <div class="debug-info">
-      <h3>Debug Info:</h3>
-      <p>Labels: {{ labels.length }} items</p>
-      <p>Values: {{ values.length }} items</p>
-      <p>Último valor: {{ lastValue }}</p>
-      <p>Última actualización: {{ lastUpdate }}</p>
-      <button (click)="addTestData()">Agregar dato de prueba</button>
-    </div>
-    <div echarts 
-         [options]="chartOptions" 
-         [merge]="updateOptions"
-         (chartInit)="onChartInit($event)"
-         class="chart">
-    </div>
-  `,
-  styleUrls: ['./temperature-chart.component.scss']
+  styleUrls: ['./temperature-chart.component.scss'],
+  templateUrl: './temperature-chart.component.html'
 })
+
 export class TemperatureChartComponent implements OnInit, OnDestroy {
   private sub!: Subscription;
   
-  // Hacer públicas para el debug
   public labels: string[] = [];
   public values: number[] = [];
   public lastValue: number = 0;
@@ -71,9 +56,8 @@ export class TemperatureChartComponent implements OnInit, OnDestroy {
     console.log('📊 Gráfico inicializado:', this.chartInstance);
   }
 
-  // Método para agregar datos de prueba
   addTestData(): void {
-    const testTemp = Math.random() * 30 + 15; // Temperatura aleatoria entre 15-45°C
+    const testTemp = Math.random() * 30 + 15; 
     const testTime = new Date().toLocaleTimeString('es-MX', { hour12: false });
     
     console.log('🧪 Agregando dato de prueba:', { temperatura: testTemp, tiempo: testTime });
@@ -119,7 +103,6 @@ export class TemperatureChartComponent implements OnInit, OnDestroy {
       }
     }
 
-    // Método 3: Recrear todo el objeto
     this.chartOptions = {
       ...this.chartOptions,
       xAxis: { 
@@ -155,7 +138,6 @@ export class TemperatureChartComponent implements OnInit, OnDestroy {
   });
 
 
-    // Agregar algunos datos iniciales para probar
     setTimeout(() => {
       console.log('🔄 Agregando datos iniciales...');
       this.addTestData();

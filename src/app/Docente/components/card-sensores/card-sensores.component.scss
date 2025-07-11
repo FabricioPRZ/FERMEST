@@ -1,0 +1,50 @@
+.cardm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1em auto;
+  position: relative;
+}
+
+.card {
+  position: relative;
+  width: 270px;
+  height: 130px;
+  border-radius: 25px;
+  color: black;
+  z-index: 2;
+  transition: .4s ease-in-out;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.weather {
+width: 60px;   
+  height: 60px;
+  margin-right: 1em;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main {
+  font-size: 1.5em;
+  line-height: 1.2;
+}
+
+.mainsub {
+  font-size: 0.9em;
+  margin-top: 0.3em;
+  color: #555;
+}
+
+.card:hover {
+  background-color: #FFE87C;
+  cursor: pointer;
+}

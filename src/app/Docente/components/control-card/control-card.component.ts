@@ -9,7 +9,7 @@ export class ControlCardComponent {
   @Input() title = '';
   @Input() description = '';
   @Input() checked = false;
-  @Input() device!: string; // id único del actuador / sensor
+  @Input() device!: string; 
 
   @Output() toggled = new EventEmitter<{ device: string; on: boolean }>();
 

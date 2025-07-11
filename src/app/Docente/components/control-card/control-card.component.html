@@ -1,10 +1,33 @@
 <div class="control-card">
+  <div class="card-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+            d="M13 10V3L4 14h7v7l9-11h-7z" />
+    </svg>
+  </div>
   <div class="card-content">
-    <div class="card-title">{{ title }}</div>
+    <div class="card-header">
+      <div class="card-title">{{ title }}</div>
+      <div class="card-badge">Control</div>
+    </div>
     <div class="card-desc">{{ description }}</div>
+    <div class="card-footer">
+      <div class="card-status">Estado: {{ checked ? 'Activo' : 'Inactivo' }}</div>
+    </div>
   </div>
   <label class="switch">
     <input class="input" type="checkbox" [checked]="checked" (change)="toggle()">
-    <span class="slider"></span>
+    <span class="slider">
+      <span class="slider-icon slider-icon-on">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </span>
+      <span class="slider-icon slider-icon-off">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </span>
+    </span>
   </label>
 </div>

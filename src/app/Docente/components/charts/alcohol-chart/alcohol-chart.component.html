@@ -1,1 +1,6 @@
-<p>alcohol-chart works!</p>
+<div echarts 
+     [options]="chartOptions" 
+     [merge]="updateOptions"
+     (chartInit)="onChartInit($event)"
+     class="chart">
+</div>

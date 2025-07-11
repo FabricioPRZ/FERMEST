@@ -8,8 +8,8 @@ import { NotificationService } from '../../../services/notification.service';
   selector: 'app-conductivity-chart',
   standalone: true,
   imports: [CommonModule, NgxEchartsModule],
-  template: `<div echarts [options]="chartOptions" class="chart"></div>`,
-  styleUrls: ['./conductivity-chart.component.scss']
+  styleUrls: ['./conductivity-chart.component.scss'],
+  templateUrl: './conductivity-chart.component.html', 
 })
 export class ConductivityChartComponent implements OnInit, OnDestroy {
   private sub!: Subscription;

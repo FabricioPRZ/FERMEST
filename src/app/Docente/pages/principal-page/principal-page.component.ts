@@ -7,10 +7,12 @@ import { HistoryCardComponent } from '../../components/history-card/history-card
 import { SensorStateService, DeviceId } from '../../services/sensor-state.service';
 import { CommandService } from '../../services/command.service';
 import { Subscription } from 'rxjs';
+import { CardSensoresComponent } from "../../components/card-sensores/card-sensores.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-principal-page',
-  imports: [CommonModule, RouterModule, FormsModule, ControlCardComponent, HistoryCardComponent],
+  imports: [CommonModule, RouterModule, FormsModule, ControlCardComponent, HistoryCardComponent, CardSensoresComponent],
   templateUrl: './principal-page.component.html',
   styleUrl: './principal-page.component.scss'
 })
@@ -33,6 +35,7 @@ recentHistory = [
   sensorStates: Record<DeviceId, boolean> = {} as any;
 
   constructor(
+    private router : Router,
     private cmd: CommandService,
     private sensorState: SensorStateService
   ) {}
@@ -67,5 +70,10 @@ recentHistory = [
         this.sensorState.set('sensores', false);
       }
     }
+  }
+
+  sendToViewMore(event: Event) {
+    event.preventDefault();
+    this.router.navigate(['dashboard-docente/sensores'])
   }
 }
