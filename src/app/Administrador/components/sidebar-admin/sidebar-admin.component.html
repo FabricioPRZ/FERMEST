@@ -1,0 +1,30 @@
+<div class="app-container">
+<nav class="sidebar-nav">
+  <ul class="sidebar-list">
+    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-dashboard-administrador/inicio')}">
+      <a (click)="goToInicio($event)" class="sidebar-link">
+        <span class="sidebar-icon">
+          <img class="sidebar-img" src="icons/casa.png" alt="">
+        </span>
+        <span class="sidebar-label">Página Principal</span>
+      </a>
+    </li>
+    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-dashboard-administrador/sensores')}">
+      <a (click)="goToSensores($event)" class="sidebar-link">
+        <span class="sidebar-icon">
+          <img class="sidebar-img" src="icons/sensor.png" alt="">
+        </span>
+        <span class="sidebar-label">Sensores</span>
+      </a>
+    </li>
+    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-administrador/add-user')}">
+      <a (click)="goToAddUser($event)" class="sidebar-link">
+        <span class="sidebar-icon">
+          <img class="sidebar-img" src="icons/agregar-usuario.png" alt="">
+        </span>
+        <span class="sidebar-label">Agregar usuario</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>

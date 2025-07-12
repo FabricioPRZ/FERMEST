@@ -1,0 +1,72 @@
+<h1 class="dashboard-title">
+  Panel Principal
+  <img class="dashboard-title-img" src="icons/casa-1.png" alt="Ícono Dashboard" />
+</h1>
+
+<section class="dashboard-section">
+  <h2 class="section-title">
+    Estadísticas de Sensores
+    <img class="section-icon" src="icons/estadisticas1.png" alt="Ícono estadísticas" />
+  </h2>
+  <div class="stats-preview">
+        <app-card-sensores 
+          icono="icons/temperature.svg"
+          dato="27° C"
+          nameSensor="Temperatura DS18B20">
+        </app-card-sensores>
+
+        <app-card-sensores 
+          icono="icons/flask.svg"
+          dato="55°"
+          nameSensor="Nivel de alcohol MQ3">
+        </app-card-sensores>
+        
+        <app-card-sensores 
+          icono="icons/droplet.svg"
+          dato="7 Estable"
+          nameSensor="Nivel de PH">
+        </app-card-sensores>
+
+        <app-card-sensores 
+          icono="icons/voltage.svg"
+          dato="5.3 V"
+          nameSensor="Conductividad">
+        </app-card-sensores>
+
+        <app-card-sensores 
+          icono="icons/cloudy.svg"
+          dato="3 Contaminada"
+          nameSensor="Turbidez">
+        </app-card-sensores>
+  </div>
+</section>
+
+<section class="dashboard-section">
+  <h2 class="section-title">
+    Estado actual de Sensores
+    <img class="section-icon" src="icons/sensor-1.png" alt="Ícono sensores" />
+  </h2>
+
+  <div class="sensor-cards-preview">
+    <app-control-card
+        *ngFor="let device of devicesPreview"
+        [title]="device.title"
+        [description]="device.description"
+        [checked]="isChecked(device.id)"
+        [device]="device.id"
+        (toggled)="onToggle($event)"
+        class="small-card"
+    ></app-control-card>
+  </div>
+
+  <button class="button" (click)="sendToViewMore($event)">
+    Ver todos los sensores
+    <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+      <path
+        clip-rule="evenodd"
+        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+        fill-rule="evenodd"
+      ></path>
+    </svg>
+  </button>
+</section>

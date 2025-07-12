@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './modules/login/login.component';
 import { RegisterComponent } from './modules/register/register.component';
+
+// Docente
 import { DashboardComponent } from './Docente/modules/dashboard/dashboard.component';
 import { SensoresComponent } from './Docente/pages/sensores/sensores.component';
 import { PrincipalPageComponent } from './Docente/pages/principal-page/principal-page.component';
@@ -12,6 +14,11 @@ import { PhChartComponent } from './Docente/components/charts/ph-chart/ph-chart.
 import { TurbidityChartComponent } from './Docente/components/charts/turbidity-chart/turbidity-chart.component';
 import { ConductivityChartComponent } from './Docente/components/charts/conductivity-chart/conductivity-chart.component';
 import { CalculatorComponent } from './Docente/pages/calculator/calculator.component';
+
+// Administrador
+import { DashboardAdministradorComponent } from './Administrador/modules/dashboard-administrador/dashboard-administrador.component';
+import { PrincipalPageAdminComponent } from './Administrador/pages/principal-page-admin/principal-page-admin.component';
+import { SensoresAdminComponent } from './Administrador/pages/sensores-admin/sensores-admin.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -37,6 +44,15 @@ export const routes: Routes = [
             { path: 'history', component:SensorsHistoryComponent},
             { path: 'calculator', component: CalculatorComponent},
             
+        ]
+    },
+
+    // Administrador
+    { path: 'dashboard-administrador', component: DashboardAdministradorComponent,
+        children: [
+            { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+            { path: 'inicio', component: PrincipalPageAdminComponent},
+            { path: 'sensores', component: SensoresAdminComponent}
         ]
     }
 ];

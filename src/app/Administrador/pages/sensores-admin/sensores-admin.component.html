@@ -1,0 +1,76 @@
+<h1 class="dashboard-title">
+  Sensores
+  <img class="dashboard-title-img" src="icons/sensor-1.png" alt="Ícono de sensores">
+</h1>
+
+<div class="top-cards">
+  <app-control-card
+    class="wide"
+    title="Manipulación de sensores"
+    description="Esto controla el encendido y apagado de todos los sensores en general..."
+    [checked]="isChecked('sensores')"
+    device="sensores"
+    (toggled)="onToggle($event)">
+  </app-control-card>
+
+  <app-control-card
+    class="wide"
+    title="Manipulación de bomba"
+    description="Esto controla el encendido y apagado de la bomba de agua."
+    [checked]="isChecked('bomba')"
+    device="bomba"
+    (toggled)="onToggle($event)">
+  </app-control-card>
+
+  <app-control-card
+    class="wide"
+    title="Manipulación de motor"
+    description="Esto controla el encendido y apagado del motor..."
+    [checked]="isChecked('motor')"
+    device="motor"
+    (toggled)="onToggle($event)">
+  </app-control-card>
+</div>
+
+<h2 class="sensors-section-title">Sensores individuales</h2>
+<div class="cards-grid">
+  <app-control-card
+    title="MQ3 - Alcohol"
+    description="Detecta la producción de alcohol..."
+    [checked]="isChecked('alcohol')"
+    device="alcohol"
+    (toggled)="onToggle($event)">
+  </app-control-card>
+
+  <app-control-card
+    title="DS18B20 - Temperatura"
+    description="Mide la temperatura interna..."
+    [checked]="isChecked('temperatura')"
+    device="temperatura"
+    (toggled)="onToggle($event)">
+  </app-control-card>
+
+  <app-control-card
+    title="SEN0161 - PH"
+    description="Mide el nivel de acidez..."
+    [checked]="isChecked('ph')"
+    device="ph"
+    (toggled)="onToggle($event)">
+  </app-control-card>
+
+  <app-control-card
+    title="SEN0189 - Turbidez"
+    description="Mide la claridad del líquido..."
+    [checked]="isChecked('turbidez')"
+    device="turbidez"
+    (toggled)="onToggle($event)">
+  </app-control-card>
+
+  <app-control-card
+    title="SEN0244 - Conductividad"
+    description="Evalúa la cantidad de sales..."
+    [checked]="isChecked('conductividad')"
+    device="conductividad"
+    (toggled)="onToggle($event)">
+  </app-control-card>
+</div>
