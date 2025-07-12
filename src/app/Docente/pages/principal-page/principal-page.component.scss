@@ -51,6 +51,7 @@ body {
   width: 40px;
   height: 40px;
   object-fit: contain;
+  filter: brightness(0%) saturate(100%);
 }
 
 .dashboard-section {
@@ -76,6 +77,7 @@ body {
   width: 28px;
   height: 28px;
   object-fit: contain;
+  filter: brightness(0%) saturate(100%);
 }
 
 .stats-preview {

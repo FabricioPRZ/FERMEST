@@ -19,6 +19,7 @@ import { CalculatorComponent } from './Docente/pages/calculator/calculator.compo
 import { DashboardAdministradorComponent } from './Administrador/modules/dashboard-administrador/dashboard-administrador.component';
 import { PrincipalPageAdminComponent } from './Administrador/pages/principal-page-admin/principal-page-admin.component';
 import { SensoresAdminComponent } from './Administrador/pages/sensores-admin/sensores-admin.component';
+import { AddUsersComponent } from './Administrador/pages/add-users/add-users.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -52,7 +53,8 @@ export const routes: Routes = [
         children: [
             { path: '', redirectTo: 'inicio', pathMatch: 'full' },
             { path: 'inicio', component: PrincipalPageAdminComponent},
-            { path: 'sensores', component: SensoresAdminComponent}
+            { path: 'sensores', component: SensoresAdminComponent},
+            { path: 'add-user', component: AddUsersComponent}
         ]
     }
 ];
