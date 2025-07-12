@@ -1,43 +1,82 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormUserComponent } from '../../components/form-user/form-user.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-users',
+  imports: [FormUserComponent, CommonModule, FormsModule],
   templateUrl: './add-users.component.html',
   styleUrls: ['./add-users.component.scss'],
-  standalone: true,
-  imports: [ReactiveFormsModule],
 })
 export class AddUsersComponent {
-  userForm!: FormGroup;
-  showPassword = false;
-  showVerifyPassword = false;
+  showModal = false;
+  isEditing = false;
+  currentUserIndex: number | null = null;
+  selectedUserData: any = null;
 
-  constructor(private fb: FormBuilder) {}
+  searchTerm = '';
+  currentPage = 1;
+  itemsPerPage = 5;
 
-  ngOnInit(): void {
-    this.userForm = this.fb.group(
-      {
-        name: ['', Validators.required],
-        lastname: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        verifyPassword: ['', Validators.required],
-        role: ['', Validators.required],
-      },
-      { validator: this.passwordMatchValidator }
+  usuarios = [
+    { name: 'Fabricio', lastname: 'Pérez', email: 'fabricio@email.com', role: 'admin' },
+    { name: 'Yaretzi', lastname: 'Velazquez', email: 'yare@email.com', role: 'estudiante' },
+    { name: 'Luis', lastname: 'Hernández', email: 'luis@email.com', role: 'estudiante' },
+    { name: 'María', lastname: 'Rodríguez', email: 'maria@email.com', role: 'docente' },
+    { name: 'Carlos', lastname: 'Díaz', email: 'carlos@email.com', role: 'admin' },
+    { name: 'Laura', lastname: 'Martínez', email: 'laura@email.com', role: 'estudiante' },
+    { name: 'Pedro', lastname: 'López', email: 'pedro@email.com', role: 'docente' },
+  ];
+
+  openModal(index: number | null = null): void {
+    this.isEditing = index !== null;
+    this.currentUserIndex = index;
+    this.selectedUserData = index !== null ? { ...this.usuarios[index] } : null;
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    this.selectedUserData = null;
+    this.currentUserIndex = null;
+  }
+
+  onUserSubmitted(user: any): void {
+    if (this.isEditing && this.currentUserIndex !== null) {
+      this.usuarios[this.currentUserIndex] = user;
+    } else {
+      this.usuarios.push(user);
+    }
+    this.closeModal();
+  }
+
+  deleteUser(index: number): void {
+    if (confirm('¿Estás seguro de eliminar este usuario?')) {
+      this.usuarios.splice(index, 1);
+    }
+  }
+
+  get filteredUsers() {
+    return this.usuarios.filter(user =>
+      Object.values(user).some(value =>
+        value.toLowerCase().includes(this.searchTerm.toLowerCase())
+      )
     );
   }
 
-  passwordMatchValidator(form: FormGroup) {
-    const pass = form.get('password')?.value;
-    const confirmPass = form.get('verifyPassword')?.value;
-    return pass === confirmPass ? null : { mismatch: true };
+  get paginatedUsers() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredUsers.slice(start, start + this.itemsPerPage);
   }
 
-  onSubmit() {
-    if (this.userForm.valid) {
-      console.log('Usuario registrado:', this.userForm.value);
+  totalPages(): number {
+    return Math.ceil(this.filteredUsers.length / this.itemsPerPage);
+  }
+
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage = page;
     }
   }
 }
