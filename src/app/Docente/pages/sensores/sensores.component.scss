@@ -35,10 +35,11 @@
 }
 
 .top-cards {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   flex-direction: row;       
   flex-wrap: wrap;           
-  gap: 24px;
+  gap: 27.7px;
   margin-bottom: 32px;
   justify-content: flex-start; 
 }
