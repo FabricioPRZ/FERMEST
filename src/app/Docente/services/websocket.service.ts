@@ -12,7 +12,7 @@ export class WebsocketService implements OnDestroy {
   private sessionId = "1";
 
   connect(): void{
-    this.ws = new WebSocket(`ws://34.196.95.251:8088/ws?user_id=${this.userId}&session_id=${this.sessionId}`);
+    this.ws = new WebSocket(`ws://localhost/ws?user_id=${this.userId}&session_id=${this.sessionId}`);
   
   this.ws.onopen = () => {
       console.log('WebSocket conectado');
