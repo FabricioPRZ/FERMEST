@@ -1,0 +1,37 @@
+<h1 class="dashboard-title">
+  Historial de Fermentaciones
+  <img class="dashboard-title-img" src="icons/fermentacion.png" alt="Ícono Fermentación" />
+</h1>
+
+<div class="fermentation-header">
+  <button class="add-btn" (click)="registerFermentation()">+ Registrar Fermentación</button>
+</div>
+
+<table class="fermentation-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Fecha de Inicio</th>
+      <th>Duración</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let fermentation of fermentations; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ fermentation.name }}</td>
+      <td>{{ fermentation.startDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+      <td>{{ fermentation.duration }}</td>
+      <td>
+        <span [ngClass]="getStatusClass(fermentation.status)">
+          {{ fermentation.status }}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="fermentations.length === 0" class="no-records">
+  No hay fermentaciones registradas aún.
+</div>

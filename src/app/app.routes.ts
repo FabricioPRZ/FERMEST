@@ -20,6 +20,13 @@ import { DashboardAdministradorComponent } from './Administrador/modules/dashboa
 import { PrincipalPageAdminComponent } from './Administrador/pages/principal-page-admin/principal-page-admin.component';
 import { SensoresAdminComponent } from './Administrador/pages/sensores-admin/sensores-admin.component';
 import { AddUsersComponent } from './Administrador/pages/add-users/add-users.component';
+import { DashboardStudentComponent } from './Estudiante/modules/dashboard-student/dashboard-student.component';
+import { PrincipalPageStudentComponent } from './Estudiante/pages/principal-page-student/principal-page-student.component';
+import { StatisticsStudentComponent } from './Estudiante/pages/statistics-student/statistics-student.component';
+import { ReportsStudentComponent } from './Estudiante/pages/reports-student/reports-student.component';
+import { FermentationStudentComponent } from './Estudiante/pages/fermentation-student/fermentation-student.component';
+import { ReportsComponent } from './Docente/pages/reports/reports.component';
+import { FermentationComponent } from './Docente/pages/fermentation/fermentation.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -44,6 +51,8 @@ export const routes: Routes = [
             { path: 'sensores', component: SensoresComponent },
             { path: 'history', component:SensorsHistoryComponent},
             { path: 'calculator', component: CalculatorComponent},
+            { path: 'reports', component: ReportsComponent},
+            { path: 'fermentation', component: FermentationComponent}
             
         ]
     },
@@ -55,6 +64,26 @@ export const routes: Routes = [
             { path: 'inicio', component: PrincipalPageAdminComponent},
             { path: 'sensores', component: SensoresAdminComponent},
             { path: 'add-user', component: AddUsersComponent}
+        ]
+    },
+
+    // Estudiante
+    { path: 'dashboard-estudiante', component: DashboardStudentComponent,
+        children: [
+            { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+            { path: 'inicio', component: PrincipalPageStudentComponent},
+            { path: 'statistics', component: StatisticsStudentComponent,
+                children: [
+                    { path: '', redirectTo: 'temperatura', pathMatch: 'full' },
+                    { path: 'temperatura', component: TemperatureChartComponent },
+                    { path: 'alcohol', component: AlcoholChartComponent },
+                    { path: 'ph', component: PhChartComponent },
+                    { path: 'turbidez', component: TurbidityChartComponent },
+                    { path: 'conductividad', component: ConductivityChartComponent }
+                ]
+            },
+            { path: 'reports', component: ReportsStudentComponent},
+            { path: 'fermentation', component: FermentationStudentComponent}
         ]
     }
 ];

@@ -41,12 +41,20 @@
         <span class="sidebar-label">Cálculos</span>
       </a>
     </li>
-    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-docente/fermentacion')}">
-      <a (click)="goToFermentacion($event)" class="sidebar-link">
+    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-docente/fermentation')}">
+      <a (click)="goToFermentation($event)" class="sidebar-link">
         <span class="sidebar-icon">
           <img class="sidebar-img" src="icons/fermentacion.png" alt="">
         </span>
         <span class="sidebar-label">Fermentación</span>
+      </a>
+    </li>
+    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-docente/reports')}">
+      <a (click)="goToReports($event)" class="sidebar-link">
+        <span class="sidebar-icon">
+          <img class="sidebar-img" src="icons/reporte.png" alt="">
+        </span>
+        <span class="sidebar-label">Reportes</span>
       </a>
     </li>
   </ul>

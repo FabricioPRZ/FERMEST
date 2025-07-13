@@ -1,0 +1,92 @@
+:host {
+  display: block;
+  padding: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .dashboard-title-img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    filter: brightness(0%) saturate(100%);
+  }
+}
+
+.reports-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+
+  .generate-btn {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #27642b;
+    }
+  }
+}
+
+.reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+
+  th,
+  td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1rem;
+  }
+
+  th {
+    background-color: #f1f1f1;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  .download-btn {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #1565c0;
+    }
+  }
+}
+
+.no-reports {
+  margin-top: 24px;
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}

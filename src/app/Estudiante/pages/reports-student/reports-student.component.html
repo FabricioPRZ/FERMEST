@@ -1,0 +1,33 @@
+<h1 class="dashboard-title">
+  Reportes Generados
+  <img class="dashboard-title-img" src="icons/reporte.png" alt="Ícono Reporte" />
+</h1>
+
+<div class="reports-header">
+  <button class="generate-btn" (click)="generateReport()">+ Generar Reporte</button>
+</div>
+
+<table class="reports-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre del Reporte</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let report of reports; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ report.name }}</td>
+      <td>{{ report.date | date: 'dd/MM/yyyy HH:mm' }}</td>
+      <td>
+        <button class="download-btn" (click)="downloadReport(report)">Descargar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="reports.length === 0" class="no-reports">
+  No hay reportes generados aún.
+</div>

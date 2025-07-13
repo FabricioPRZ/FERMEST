@@ -1,0 +1,38 @@
+<div class="app-container">
+<nav class="sidebar-nav">
+  <ul class="sidebar-list">
+    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-estudiante/inicio')}">
+      <a (click)="goToInicio($event)" class="sidebar-link">
+        <span class="sidebar-icon">
+          <img class="sidebar-img" src="icons/casa.png" alt="">
+        </span>
+        <span class="sidebar-label">Página Principal</span>
+      </a>
+    </li>
+    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-estudiante/statistics')}">
+      <a (click)="goToStatistics($event)" class="sidebar-link">
+        <span class="sidebar-icon">
+          <img class="sidebar-img" src="icons/estadisticas.png" alt="">
+        </span>
+        <span class="sidebar-label">Estadísticas</span>
+      </a>
+    </li>
+    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-estudiante/fermentation')}">
+      <a (click)="goToFermentation($event)" class="sidebar-link">
+        <span class="sidebar-icon">
+          <img class="sidebar-img" src="icons/fermentacion.png" alt="">
+        </span>
+        <span class="sidebar-label">Fermentación</span>
+      </a>
+    </li>
+    <li class="sidebar-item" [ngClass]="{'active': isActive('/dashboard-estudiante/reports')}">
+      <a (click)="goToReports($event)" class="sidebar-link">
+        <span class="sidebar-icon">
+          <img class="sidebar-img" src="icons/reporte.png" alt="">
+        </span>
+        <span class="sidebar-label">Reportes</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>

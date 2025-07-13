@@ -1,0 +1,42 @@
+<h1 class="dashboard-title">
+  Panel Principal
+  <img class="dashboard-title-img" src="icons/casa-1.png" alt="Ícono Dashboard" />
+</h1>
+
+<section class="dashboard-section">
+  <h2 class="section-title">
+    Estadísticas de Sensores
+    <img class="section-icon" src="icons/estadisticas1.png" alt="Ícono estadísticas" />
+  </h2>
+  <div class="stats-preview">
+        <app-card-sensores 
+          icono="icons/temperature.svg"
+          dato="27° C"
+          nameSensor="Temperatura DS18B20">
+        </app-card-sensores>
+
+        <app-card-sensores 
+          icono="icons/flask.svg"
+          dato="55°"
+          nameSensor="Nivel de alcohol MQ3">
+        </app-card-sensores>
+        
+        <app-card-sensores 
+          icono="icons/droplet.svg"
+          dato="7 Estable"
+          nameSensor="Nivel de PH">
+        </app-card-sensores>
+
+        <app-card-sensores 
+          icono="icons/voltage.svg"
+          dato="5.3 V"
+          nameSensor="Conductividad">
+        </app-card-sensores>
+
+        <app-card-sensores 
+          icono="icons/cloudy.svg"
+          dato="3 Contaminada"
+          nameSensor="Turbidez">
+        </app-card-sensores>
+  </div>
+</section>

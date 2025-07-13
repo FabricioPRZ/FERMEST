@@ -32,9 +32,14 @@ export class SidebarComponent {
     event.preventDefault();
     this.router.navigate(['/dashboard-docente/calculator']);
   }
-  goToFermentacion(event: Event) {
+  goToFermentation(event: Event) {
     event.preventDefault();
-    this.router.navigate(['/dashboard-docente/fermentacion']);
+    this.router.navigate(['/dashboard-docente/fermentation']);
+  }
+
+  goToReports(event: Event) {
+    event.preventDefault();
+    this.router.navigate(['/dashboard-docente/reports']);
   }
 
   isActive(path: string): boolean {
