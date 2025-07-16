@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { LandingPageComponent } from './modules/landing-page/landing-page.component';
 import { LoginComponent } from './modules/login/login.component';
 import { RegisterComponent } from './modules/register/register.component';
 
@@ -28,8 +29,10 @@ import { FermentationStudentComponent } from './Estudiante/pages/fermentation-st
 import { ReportsComponent } from './Docente/pages/reports/reports.component';
 import { FermentationComponent } from './Docente/pages/fermentation/fermentation.component';
 
+
 export const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+    { path: 'inicio', component: LandingPageComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
 
