@@ -9,6 +9,7 @@ import { CommandService } from '../../services/command.service';
 import { Subscription } from 'rxjs';
 import { CardSensoresComponent } from "../../components/card-sensores/card-sensores.component";
 import { Router } from '@angular/router';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-principal-page',
@@ -17,7 +18,7 @@ import { Router } from '@angular/router';
   styleUrl: './principal-page.component.scss'
 })
 export class PrincipalPageComponent implements OnInit, OnDestroy {
-recentHistory = [
+  recentHistory = [
     { sensorName: 'Temperatura', date: '2025-07-01', value: '27 °C' },
     { sensorName: 'Alcohol', date: '2025-07-01', value: '0.45 %' },
     { sensorName: 'pH', date: '2025-06-30', value: '6.8' },
@@ -35,10 +36,21 @@ recentHistory = [
   sensorStates: Record<DeviceId, boolean> = {} as any;
 
   constructor(
-    private router : Router,
+    private router: Router,
     private cmd: CommandService,
-    private sensorState: SensorStateService
-  ) {}
+    private sensorState: SensorStateService,
+    private notificationService: NotificationService
+  ) {
+    this.notificationService.showToast('Mensaje de éxito', 'success');
+
+    this.notificationService.addNotification({
+      title: 'Alerta importante',
+      message: 'Se ha detectado un problema en el sistema',
+      type: 'error',
+      route: '/dashboard/alerts'
+    });
+  }
+
 
   ngOnInit(): void {
     this.sub = this.sensorState.observe(states => {

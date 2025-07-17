@@ -1,0 +1,51 @@
+<form [formGroup]="fermentationForm" (ngSubmit)="submitForm()" class="fermentation-form">
+  <div class="form-grid">
+    <label>Fecha de inicio
+      <input type="datetime-local" formControlName="started_at" />
+    </label>
+    <label>Duración (horas)
+      <input type="number" formControlName="duration_hours" />
+    </label>
+    <label>Materia prima
+      <input type="text" formControlName="raw_material" />
+    </label>
+    <label>Concentración de azúcar
+      <input type="number" formControlName="sugar_concentration" />
+    </label>
+    <label>Volumen inicial
+      <input type="number" formControlName="initial_volume" />
+    </label>
+    <label>Categoría del microorganismo
+      <input type="text" formControlName="microorganism_category" />
+    </label>
+    <label>Nombre del microorganismo
+      <input type="text" formControlName="microorganism_name" />
+    </label>
+    <label>Cantidad de microorganismo
+      <input type="number" formControlName="microorganism_quantity" />
+    </label>
+    <label>Agitación (RPM)
+      <input type="number" formControlName="agitation_rpm" />
+    </label>
+    <label>Temperatura (°C)
+      <input type="number" formControlName="temperature" />
+    </label>
+    <label>pH inicial
+      <input type="number" step="0.01" formControlName="initial_ph" />
+    </label>
+    <label>pH final
+      <input type="number" step="0.01" formControlName="final_ph" />
+    </label>
+    <label>Concentración de etanol
+      <input type="number" formControlName="ethanol_concentration" />
+    </label>
+    <label>Eficiencia de fermentación
+      <input type="number" formControlName="fermentation_efficiency" />
+    </label>
+    <label>Tasa de fermentación
+      <input type="number" formControlName="fermentation_rate" />
+    </label>
+  </div>
+
+  <button type="submit" class="submit-btn">Guardar Fermentación</button>
+</form>

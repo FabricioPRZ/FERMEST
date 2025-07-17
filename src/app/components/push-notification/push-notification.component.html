@@ -1,0 +1,4 @@
+<div *ngIf="notificationService.visible$ | async" class="push-notification"
+    [ngClass]="[notificationService.type$ | async, isVisible ? 'slide-in' : 'slide-out']">
+    <p>{{ notificationService.message$ | async }}</p>
+</div>

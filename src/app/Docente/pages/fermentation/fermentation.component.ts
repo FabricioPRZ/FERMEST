@@ -1,37 +1,33 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FermentationFormComponent } from '../../components/fermentation-form/fermentation-form.component';
 
 @Component({
   selector: 'app-fermentation',
-  imports: [CommonModule],
+  imports: [CommonModule, FermentationFormComponent],
   templateUrl: './fermentation.component.html',
   styleUrl: './fermentation.component.scss'
 })
 export class FermentationComponent {
-  fermentations = [
-    {
-      name: 'Lote A',
-      startDate: new Date('2025-07-10T08:30:00'),
-      duration: '72 horas',
-      status: 'en proceso',
-    },
-    {
-      name: 'Lote B',
-      startDate: new Date('2025-07-05T14:00:00'),
-      duration: '48 horas',
-      status: 'finalizado',
-    },
-    {
-      name: 'Lote C',
-      startDate: new Date('2025-07-12T09:00:00'),
-      duration: 'Pendiente',
-      status: 'pendiente',
-    },
-  ];
+  fermentations: any[] = [];
+  showModal = false;
 
   registerFermentation(): void {
-    alert('Función de registrar fermentación aún no implementada (pendiente datos)');
-    // Aquí se abriría un modal o se navega a una vista/formulario en el futuro.
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+  }
+
+  handleSubmit(formData: any): void {
+    this.fermentations.push({
+      name: formData.raw_material,
+      startDate: new Date(formData.started_at),
+      duration: `${formData.duration_hours} horas`,
+      status: 'en proceso'
+    });
+    this.closeModal();
   }
 
   getStatusClass(status: string): string {

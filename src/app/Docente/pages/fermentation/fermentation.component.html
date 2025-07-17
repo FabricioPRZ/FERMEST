@@ -35,3 +35,11 @@
 <div *ngIf="fermentations.length === 0" class="no-records">
   No hay fermentaciones registradas aún.
 </div>
+
+<div class="modal-overlay" *ngIf="showModal">
+  <div class="modal-content">
+    <h2>Registrar Fermentación</h2>
+    <app-fermentation-form (onSubmitForm)="handleSubmit($event)"></app-fermentation-form>
+    <button class="close-btn" (click)="closeModal()">✖</button>
+  </div>
+</div>

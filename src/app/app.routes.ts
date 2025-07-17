@@ -28,6 +28,8 @@ import { ReportsStudentComponent } from './Estudiante/pages/reports-student/repo
 import { FermentationStudentComponent } from './Estudiante/pages/fermentation-student/fermentation-student.component';
 import { ReportsComponent } from './Docente/pages/reports/reports.component';
 import { FermentationComponent } from './Docente/pages/fermentation/fermentation.component';
+import { ProfileComponent } from './modules/profile/profile.component';
+import { NotificationsComponent } from './modules/notifications/notifications.component';
 
 
 export const routes: Routes = [
@@ -35,6 +37,8 @@ export const routes: Routes = [
     { path: 'inicio', component: LandingPageComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: 'notifications', component: NotificationsComponent },
 
     // Docente
     { path: 'dashboard-docente', component: DashboardComponent,

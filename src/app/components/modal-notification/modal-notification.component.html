@@ -1,0 +1,35 @@
+<div class="notification-modal">
+  <div class="modal-header">
+    <h3>Notificaciones</h3>
+    <div class="header-actions">
+      <button class="mark-all-read" (click)="notificationService.markAllAsRead()">
+        Marcar todas como leídas
+      </button>
+      <button class="close-modal" (click)="closeModal.emit()">
+        &times;
+      </button>
+    </div>
+  </div>
+
+  <div class="notifications-list">
+    <div 
+      *ngFor="let notification of (notificationService.notifications$ | async)" 
+      class="notification-item" 
+      [class.unread]="!notification.read"
+      (click)="onNotificationClick(notification)"
+    >
+      <div class="notification-badge" [class]="notification.type"></div>
+      <div class="notification-content">
+        <h4>{{ notification.title }}</h4>
+        <p class="truncate">{{ notification.message }}</p>
+        <small>{{ notification.date | date:'short' }}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="view-all" (click)="viewAllNotifications()">
+      Ver todas las notificaciones
+    </button>
+  </div>
+</div>

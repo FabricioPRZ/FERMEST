@@ -1,0 +1,134 @@
+<div class="profile-container" id="profileContainer">
+    <div class="btn-container-back" *ngIf="profileForm.get('code')?.enabled">
+        <button class="btn btn-primary-back" (click)="goBack()">
+            ↵ Regresar
+        </button>
+    </div>
+    <!-- Header Section -->
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <svg class="avatar-icon" viewBox="0 0 24 24">
+                <path
+                    d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7V9C15 10.66 13.66 12 12 12S9 10.66 9 9V7L3 7V9C3 11.76 4.46 14.1 6.81 15.21L3 22H21L17.19 15.21C19.54 14.1 21 11.76 21 9Z" />
+            </svg>
+        </div>
+        <h2>
+            <svg class="title-icon" viewBox="0 0 24 24">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM7.07 18.28C7.5 17.38 10.12 16.5 12 16.5S16.5 17.38 16.93 18.28C15.57 19.36 13.86 20 12 20S8.43 19.36 7.07 18.28ZM18.36 16.83C16.93 15.09 13.46 14.5 12 14.5S7.07 15.09 5.64 16.83C4.62 15.5 4 13.82 4 12C4 7.59 7.59 4 12 4S20 7.59 20 12C20 13.82 19.38 15.5 18.36 16.83ZM12 6C10.06 6 8.5 7.56 8.5 9.5S10.06 13 12 13 15.5 11.44 15.5 9.5 13.94 6 12 6ZM12 11C11.17 11 10.5 10.33 10.5 9.5S11.17 8 12 8 13.5 8.67 13.5 9.5 12.83 11 12 11Z" />
+            </svg>
+            Perfil del Usuario
+        </h2>
+        <p class="subtitle">Administra tu información personal</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="profile-content">
+        <div class="form-card">
+            <form id="profileForm">
+                <div class="form-grid">
+                    <!-- Nombre -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <svg class="label-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7V9C15 10.66 13.66 12 12 12S9 10.66 9 9V7L3 7V9C3 11.76 4.46 14.1 6.81 15.21L3 22H21L17.19 15.21C19.54 14.1 21 11.76 21 9Z" />
+                            </svg>
+                            Nombre
+                        </label>
+                        <div class="form-input">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7V9C15 10.66 13.66 12 12 12S9 10.66 9 9V7L3 7V9C3 11.76 4.46 14.1 6.81 15.21L3 22H21L17.19 15.21C19.54 14.1 21 11.76 21 9Z" />
+                            </svg>
+                            <input id="name" type="text" placeholder="Ingresa tu nombre" required />
+                        </div>
+                    </div>
+
+                    <!-- Apellido -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <svg class="label-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M16 4C16.55 4 17 4.45 17 5S16.55 6 16 6 15 5.55 15 5 15.45 4 16 4M13 2C13.55 2 14 2.45 14 3S13.55 4 13 4 12 3.55 12 3 12.45 2 13 2M13 7.5C13 6.67 13.67 6 14.5 6S16 6.67 16 7.5 15.33 9 14.5 9 13 8.33 13 7.5M16 10.5C16 9.67 16.67 9 17.5 9S19 9.67 19 10.5 18.33 12 17.5 12 16 11.33 16 10.5M19 13.5C19 12.67 19.67 12 20.5 12S22 12.67 22 13.5 21.33 15 20.5 15 19 14.33 19 13.5M20 16.5C20 15.67 20.67 15 21.5 15S23 15.67 23 16.5 22.33 18 21.5 18 20 17.33 20 16.5M21 19.5C21 18.67 21.67 18 22.5 18S24 18.67 24 19.5 23.33 21 22.5 21 21 20.33 21 19.5M22 22.5C22 21.67 22.67 21 23.5 21S25 21.67 25 22.5 24.33 24 23.5 24 22 23.33 22 22.5M9 2C9.55 2 10 2.45 10 3S9.55 4 9 4 8 3.55 8 3 8.45 2 9 2M6 4C6.55 4 7 4.45 7 5S6.55 6 6 6 5 5.55 5 5 5.45 4 6 4M9 7.5C9 6.67 9.67 6 10.5 6S12 6.67 12 7.5 11.33 9 10.5 9 9 8.33 9 7.5M6 10.5C6 9.67 6.67 9 7.5 9S9 9.67 9 10.5 8.33 12 7.5 12 6 11.33 6 10.5M3 13.5C3 12.67 3.67 12 4.5 12S6 12.67 6 13.5 5.33 15 4.5 15 3 14.33 3 13.5M2 16.5C2 15.67 2.67 15 3.5 15S5 15.67 5 16.5 4.33 18 3.5 18 2 17.33 2 16.5M1 19.5C1 18.67 1.67 18 2.5 18S4 18.67 4 19.5 3.33 21 2.5 21 1 20.33 1 19.5M0 22.5C0 21.67 0.67 21 1.5 21S3 21.67 3 22.5 2.33 24 1.5 24 0 23.33 0 22.5Z" />
+                            </svg>
+                            Apellido
+                        </label>
+                        <div class="form-input">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M16 4C16.55 4 17 4.45 17 5S16.55 6 16 6 15 5.55 15 5 15.45 4 16 4M13 2C13.55 2 14 2.45 14 3S13.55 4 13 4 12 3.55 12 3 12.45 2 13 2M13 7.5C13 6.67 13.67 6 14.5 6S16 6.67 16 7.5 15.33 9 14.5 9 13 8.33 13 7.5M16 10.5C16 9.67 16.67 9 17.5 9S19 9.67 19 10.5 18.33 12 17.5 12 16 11.33 16 10.5M19 13.5C19 12.67 19.67 12 20.5 12S22 12.67 22 13.5 21.33 15 20.5 15 19 14.33 19 13.5M20 16.5C20 15.67 20.67 15 21.5 15S23 15.67 23 16.5 22.33 18 21.5 18 20 17.33 20 16.5M21 19.5C21 18.67 21.67 18 22.5 18S24 18.67 24 19.5 23.33 21 22.5 21 21 20.33 21 19.5M22 22.5C22 21.67 22.67 21 23.5 21S25 21.67 25 22.5 24.33 24 23.5 24 22 23.33 22 22.5M9 2C9.55 2 10 2.45 10 3S9.55 4 9 4 8 3.55 8 3 8.45 2 9 2M6 4C6.55 4 7 4.45 7 5S6.55 6 6 6 5 5.55 5 5 5.45 4 6 4M9 7.5C9 6.67 9.67 6 10.5 6S12 6.67 12 7.5 11.33 9 10.5 9 9 8.33 9 7.5M6 10.5C6 9.67 6.67 9 7.5 9S9 9.67 9 10.5 8.33 12 7.5 12 6 11.33 6 10.5M3 13.5C3 12.67 3.67 12 4.5 12S6 12.67 6 13.5 5.33 15 4.5 15 3 14.33 3 13.5M2 16.5C2 15.67 2.67 15 3.5 15S5 15.67 5 16.5 4.33 18 3.5 18 2 17.33 2 16.5M1 19.5C1 18.67 1.67 18 2.5 18S4 18.67 4 19.5 3.33 21 2.5 21 1 20.33 1 19.5M0 22.5C0 21.67 0.67 21 1.5 21S3 21.67 3 22.5 2.33 24 1.5 24 0 23.33 0 22.5Z" />
+                            </svg>
+                            <input id="lastName" type="text" placeholder="Ingresa tu apellido" required />
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <svg class="label-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" />
+                            </svg>
+                            Correo Electrónico
+                        </label>
+                        <div class="form-input">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" />
+                            </svg>
+                            <input id="email" type="email" placeholder="correo@ejemplo.com" required />
+                        </div>
+                    </div>
+
+                    <!-- Código de Activación -->
+                    <div class="form-group activation-code" *ngIf="profileForm.get('code')?.enabled">
+                        <label class="form-label">
+                            <svg class="label-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M9 12L11 14L15 10M21 12C21 16.97 16.97 21 12 21S3 16.97 3 12 7.03 3 12 3 21 7.03 21 12Z" />
+                            </svg>
+                            Código de Activación
+                        </label>
+                        <div class="form-input">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M9 12L11 14L15 10M21 12C21 16.97 16.97 21 12 21S3 16.97 3 12 7.03 3 12 3 21 7.03 21 12Z" />
+                            </svg>
+                            <input formControlName="code" type="number" placeholder="Ingresa el código de activación" />
+                        </div>
+                        <div class="form-hint">
+                            <svg class="hint-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M13 13H11V7H13M13 17H11V15H13M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2Z" />
+                            </svg>
+                            Este código solo puede ser establecido una vez
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions" *ngIf="profileForm.get('code')?.enabled">
+                    <button type="submit" class="btn btn-primary" [disabled]="loading || !profileForm.valid">
+                        <svg class="btn-icon" viewBox="0 0 24 24">
+                            <path d="M21 7L9 19L3.5 13.5L4.91 12.09L9 16.17L19.59 5.59L21 7Z" />
+                        </svg>
+                        Guardar Código
+                    </button>
+                </div>
+            </form>
+
+            <!-- Success Message -->
+            <div class="success-message" *ngIf="!profileForm.get('code')?.enabled">
+                <div class="success-content">
+                    <svg class="success-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+                    </svg>
+                    <h3>Perfil Completado</h3>
+                    <p>Tu código de activación ha sido establecido exitosamente.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
