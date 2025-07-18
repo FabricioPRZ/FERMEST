@@ -20,17 +20,19 @@
   <tbody>
     <tr *ngFor="let fermentation of fermentations; let i = index">
       <td>{{ i + 1 }}</td>
-      <td>{{ fermentation.name }}</td>
-      <td>{{ fermentation.startDate | date: 'dd/MM/yyyy HH:mm' }}</td>
-      <td>{{ fermentation.duration }}</td>
+      <td>{{ fermentation.raw_material }}</td>
+      <td>{{ fermentation.started_at | date: 'dd/MM/yyyy HH:mm' }}</td>
+      <td>{{ fermentation.duration_hours }} horas</td>
       <td>
-        <span [ngClass]="getStatusClass(fermentation.status)">
+       <span [ngClass]="getStatusClass(fermentation.status)">
           {{ fermentation.status }}
-        </span>
+       </span>
+
       </td>
     </tr>
   </tbody>
 </table>
+
 
 <div *ngIf="fermentations.length === 0" class="no-records">
   No hay fermentaciones registradas aún.

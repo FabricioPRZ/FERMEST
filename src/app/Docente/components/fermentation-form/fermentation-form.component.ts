@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   imports: [ReactiveFormsModule],
   standalone: true,
   templateUrl: './fermentation-form.component.html',
-  styleUrl: './fermentation-form.component.scss'
+  styleUrls: ['./fermentation-form.component.scss']
 })
 export class FermentationFormComponent {
   @Output() onSubmitForm = new EventEmitter<any>();

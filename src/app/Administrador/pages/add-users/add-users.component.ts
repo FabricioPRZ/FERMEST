@@ -1,33 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormUserComponent } from '../../components/form-user/form-user.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../../services/user.service';
+import { User } from '../../../interfaces/user';
 
 @Component({
   selector: 'app-add-users',
   imports: [FormUserComponent, CommonModule, FormsModule],
   templateUrl: './add-users.component.html',
   styleUrls: ['./add-users.component.scss'],
+  standalone: true,
 })
-export class AddUsersComponent {
+export class AddUsersComponent implements OnInit {
   showModal = false;
   isEditing = false;
   currentUserIndex: number | null = null;
-  selectedUserData: any = null;
+  selectedUserData: User | null = null;
 
   searchTerm = '';
   currentPage = 1;
   itemsPerPage = 5;
 
-  usuarios = [
-    { name: 'Fabricio', lastname: 'Pérez', email: 'fabricio@email.com', role: 'admin' },
-    { name: 'Yaretzi', lastname: 'Velazquez', email: 'yare@email.com', role: 'estudiante' },
-    { name: 'Luis', lastname: 'Hernández', email: 'luis@email.com', role: 'estudiante' },
-    { name: 'María', lastname: 'Rodríguez', email: 'maria@email.com', role: 'docente' },
-    { name: 'Carlos', lastname: 'Díaz', email: 'carlos@email.com', role: 'admin' },
-    { name: 'Laura', lastname: 'Martínez', email: 'laura@email.com', role: 'estudiante' },
-    { name: 'Pedro', lastname: 'López', email: 'pedro@email.com', role: 'docente' },
-  ];
+  usuarios: User[] = [];
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
+    this.userService.getAllUsers().subscribe({
+      next: (users) => {
+        console.log('Usuarios recibidos:', users);
+        this.usuarios = Array.isArray(users) ? users : [];
+        if (!Array.isArray(users)) {
+          console.warn('La respuesta no es un array:', users);
+        }
+      },
+      error: (err) => {
+        console.error('Error al cargar usuarios', err);
+        this.usuarios = [];
+      },
+    });
+  }
 
   openModal(index: number | null = null): void {
     this.isEditing = index !== null;
@@ -42,30 +59,45 @@ export class AddUsersComponent {
     this.currentUserIndex = null;
   }
 
-  onUserSubmitted(user: any): void {
-    if (this.isEditing && this.currentUserIndex !== null) {
-      this.usuarios[this.currentUserIndex] = user;
-    } else {
-      this.usuarios.push(user);
+onUserSubmitted(user: User & { password?: string }): void {
+  
+  if (this.isEditing && this.currentUserIndex !== null) {
+    const id = this.usuarios[this.currentUserIndex].id;
+    if (id !== undefined && id !== null) {
+      this.userService.updateUser(id, user).subscribe({
+        next: () => this.loadUsers(),
+        error: (err) => console.error('Error al actualizar usuario', err),
+      });
     }
-    this.closeModal();
+  } else {
+    this.userService.register(user).subscribe({
+      next: () => this.loadUsers(),
+      error: (err) => console.error('Error al crear usuario', err),
+    });
   }
+  this.closeModal();
+}
+
 
   deleteUser(index: number): void {
-    if (confirm('¿Estás seguro de eliminar este usuario?')) {
-      this.usuarios.splice(index, 1);
+    const id = this.usuarios[index]?.id;
+    if (id !== undefined && id !== null && confirm('¿Estás seguro de eliminar este usuario?')) {
+      this.userService.deleteUser(id).subscribe({
+        next: () => this.loadUsers(),
+        error: (err) => console.error('Error al eliminar usuario', err),
+      });
     }
   }
 
-  get filteredUsers() {
-    return this.usuarios.filter(user =>
-      Object.values(user).some(value =>
-        value.toLowerCase().includes(this.searchTerm.toLowerCase())
+  get filteredUsers(): User[] {
+    return this.usuarios.filter((user) =>
+      Object.values(user).some((val) =>
+        String(val).toLowerCase().includes(this.searchTerm.toLowerCase())
       )
     );
   }
 
-  get paginatedUsers() {
+  get paginatedUsers(): User[] {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     return this.filteredUsers.slice(start, start + this.itemsPerPage);
   }

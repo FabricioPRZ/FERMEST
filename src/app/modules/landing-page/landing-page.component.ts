@@ -9,5 +9,4 @@ import { FooterComponent } from "../../components/footer/footer.component";
   styleUrl: './landing-page.component.scss'
 })
 export class LandingPageComponent {
-
 }
