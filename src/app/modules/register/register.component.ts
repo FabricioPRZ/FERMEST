@@ -24,7 +24,7 @@ export class RegisterComponent {
   constructor(
     private userService: UserService,
     private router: Router
-  ) {}
+  ) { }
 
   onSubmit(event: Event) {
     event.preventDefault();
@@ -41,23 +41,23 @@ export class RegisterComponent {
       lastName: this.lastName,
       email: this.email,
       password: this.password,
-      role: 1 
+      role: 3
     };
 
-   this.userService.register(newUser).subscribe({
-  next: () => {
-    this.successMessage = 'Registro exitoso, redirigiendo a login...';
-    setTimeout(() => this.router.navigate(['/login']), 2000);
-  },
-  error: (err) => {
-    if (err.status === 500 && err.error?.error?.includes('Duplicate entry')) {
-      this.errorMessage = 'El correo electrónico ya está registrado.';
-    } else {
-      this.errorMessage = 'Error al registrar el usuario.';
-    }
-    console.error('Register error:', err);
-  }
-});
+    this.userService.register(newUser).subscribe({
+      next: () => {
+        this.successMessage = 'Registro exitoso, redirigiendo a login...';
+        setTimeout(() => this.router.navigate(['/login']), 2000);
+      },
+      error: (err) => {
+        if (err.status === 500 && err.error?.error?.includes('Duplicate entry')) {
+          this.errorMessage = 'El correo electrónico ya está registrado.';
+        } else {
+          this.errorMessage = 'Error al registrar el usuario.';
+        }
+        console.error('Register error:', err);
+      }
+    });
 
   }
 }

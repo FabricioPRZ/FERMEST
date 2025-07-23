@@ -11,35 +11,37 @@ import { NotificationService } from '../../../services/notification.service';
   styleUrls: ['./alcohol-chart.component.scss'],
   templateUrl: './alcohol-chart.component.html',
 })
-
 export class AlcoholChartComponent implements OnInit, OnDestroy {
   private sub!: Subscription;
-  
+  private previousAlcohol: number = 30; // Valor inicial dentro del rango razonable g/L
+  private intervalId: any;
+
   public labels: string[] = [];
   public values: number[] = [];
   public lastValue: number = 0;
   public lastUpdate: string = '';
-  
+
   private chartInstance: any;
 
   chartOptions: any = {
-    tooltip: { 
+    tooltip: {
       trigger: 'axis',
       formatter: (params: any) => {
         const value = params[0].value;
         const time = params[0].axisValue;
-        return `${time}<br/>Alcohol: ${value.toFixed(2)} ppm`;
+        return `${time}<br/>Alcohol: ${value.toFixed(2)} g/L`;
       }
     },
-    xAxis: { 
-      type: 'category', 
-      boundaryGap: false, 
-      data: [] 
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: []
     },
-    yAxis: { 
-      type: 'value', 
-      name: 'ppm',
-      min: 0
+    yAxis: {
+      type: 'value',
+      name: 'g/L',
+      min: 0,
+      max: 50
     },
     series: [{
       name: 'Alcohol',
@@ -57,7 +59,7 @@ export class AlcoholChartComponent implements OnInit, OnDestroy {
   constructor(
     private notifService: NotificationService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   onChartInit(chart: any): void {
     this.chartInstance = chart;
@@ -65,11 +67,21 @@ export class AlcoholChartComponent implements OnInit, OnDestroy {
   }
 
   addTestData(): void {
-    const testAlcohol = Math.random() * 500 + 50; // Rango de 50-550 ppm
+    // Variación leve ±1.5 g/L
+    const variation = (Math.random() - 0.5) * 3; // [-1.5, +1.5]
+    let testAlcohol = this.previousAlcohol + variation;
+
+    // Limitar a rango 20–40 g/L para fermentación típica
+    testAlcohol = Math.max(20, Math.min(40, testAlcohol));
+
     const testTime = new Date().toLocaleTimeString('es-MX', { hour12: false });
-    
-    console.log('🧪 Agregando dato de prueba de alcohol:', { alcohol: testAlcohol, tiempo: testTime });
-    
+
+    console.log('🧪 Agregando dato de prueba de alcohol:', {
+      alcohol: testAlcohol.toFixed(2),
+      tiempo: testTime
+    });
+
+    this.previousAlcohol = testAlcohol;
     this.addDataPoint(testAlcohol, testTime);
   }
 
@@ -92,13 +104,7 @@ export class AlcoholChartComponent implements OnInit, OnDestroy {
       valuesLength: this.values.length
     });
 
-    // Método 1: Usar merge
-    this.updateOptions = {
-      xAxis: { data: [...this.labels] },
-      series: [{ data: [...this.values] }]
-    };
-
-    // Método 2: Usar instancia directamente
+    // Actualizar gráfica via instancia si disponible
     if (this.chartInstance) {
       try {
         this.chartInstance.setOption({
@@ -111,12 +117,12 @@ export class AlcoholChartComponent implements OnInit, OnDestroy {
       }
     }
 
-    // Método 3: Recrear todo el objeto
+    // Actualizar opciones para binding Angular
     this.chartOptions = {
       ...this.chartOptions,
-      xAxis: { 
-        ...this.chartOptions.xAxis, 
-        data: [...this.labels] 
+      xAxis: {
+        ...this.chartOptions.xAxis,
+        data: [...this.labels]
       },
       series: [{
         ...this.chartOptions.series[0],
@@ -126,13 +132,13 @@ export class AlcoholChartComponent implements OnInit, OnDestroy {
 
     // Forzar detección de cambios
     this.cdr.detectChanges();
-    
+
     console.log('🔄 Detección de cambios forzada para alcohol');
   }
 
   ngOnInit(): void {
     console.log('🚀 Componente de alcohol iniciado');
-    
+
     this.sub = this.notifService.listenForNotifications().subscribe((msg: any) => {
       console.log('📩 Mensaje recibido para alcohol:', msg);
 
@@ -146,20 +152,19 @@ export class AlcoholChartComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Agregar algunos datos iniciales para probar
-    setTimeout(() => {
-      console.log('🔄 Agregando datos iniciales de alcohol...');
+    // Iniciar simulación continua cada 3 segundos
+    this.intervalId = setInterval(() => {
       this.addTestData();
-      
-      setTimeout(() => this.addTestData(), 1000);
-      setTimeout(() => this.addTestData(), 2000);
-    }, 1000);
+    }, 3000);
   }
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
     if (this.chartInstance) {
       this.chartInstance.dispose();
+    }
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
   }
 }

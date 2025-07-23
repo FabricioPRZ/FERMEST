@@ -21,7 +21,7 @@ export class NotificationService {
 
     this.isConnecting = true;
     this.ws = new WebSocket(
-      `ws://localhost/ws?user_id=${this.userId}&session_id=${this.sessionId}`
+      `ws://18.233.248.203:8080/ws?user_id=${this.userId}&session_id=${this.sessionId}`
     );
 
     this.ws.onopen = () => {

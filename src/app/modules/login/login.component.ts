@@ -28,13 +28,13 @@ export class LoginComponent {
       next: (response) => {
         switch(response.role) {
           case 1:
-            this.router.navigate(['/dashboard-docente']);
+            this.router.navigate(['/dashboard-estudiante']);
             break;
           case 2: 
-            this.router.navigate(['/dashboard-administrador']);
+            this.router.navigate(['/dashboard-docente']);
             break;
           case 3: 
-            this.router.navigate(['/dashboard-estudiante']);
+            this.router.navigate(['/dashboard-administrador']);
             break;
           default:
             this.errorMessage = 'Rol de usuario desconocido';
