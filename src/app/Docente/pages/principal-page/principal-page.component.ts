@@ -26,6 +26,7 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
     'pH': { date: new Date('2025-06-30'), value: '6.8' },
     'Turbidez': { date: new Date('2025-06-30'), value: '12 NTU' },
     'Conductividad': { date: new Date('2025-06-29'), value: '1200 mS/cm' },
+    'RPM': { date: new Date('2025-07-01'), value: '3200 RPM' }
   };
 
   sensorValues: { [sensorName: string]: string } = {
@@ -34,6 +35,7 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
     'pH': '6.8',
     'Turbidez': '12 NTU',
     'Conductividad': '1200 mS/cm',
+    'RPM': '3200'
   };
 
   recentHistory: { sensorName: string, date: string, value: string }[] = [];
@@ -42,6 +44,18 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
     { id: 'sensores', title: 'Manipulación de sensores', description: 'Controla todos los sensores en general.' },
     { id: 'bomba', title: 'Manipulación de bomba', description: 'Controla la bomba de agua.' },
     { id: 'motor', title: 'Manipulación de motor', description: 'Controla el motor principal.' },
+  ];
+
+  maxRPM = 8000;
+  maxRecordedRPM = 4500;
+  avgRPM = 3800;
+  rpmStatus = 'normal';
+  gaugeMarks = [
+    { angle: 0.25, value: 0, showValue: true },
+    { angle: 0.325, value: 2000, showValue: false },
+    { angle: 0.4, value: 4000, showValue: true },
+    { angle: 0.475, value: 6000, showValue: false },
+    { angle: 0.55, value: 8000, showValue: true }
   ];
 
   private sub!: Subscription;
@@ -57,7 +71,6 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
     private zone: NgZone
   ) {
     this.notificationService.showToast('Mensaje de éxito', 'success');
-
     this.notificationService.addNotification({
       title: 'Alerta importante',
       message: 'Se ha detectado un problema en el sistema',
@@ -108,6 +121,12 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
             this.historyMap['Conductividad'] = { date: now, value };
             this.sensorValues['Conductividad'] = value;
           }
+          if ('rpm' in data) {
+            const value = `${data.rpm}`;
+            this.historyMap['RPM'] = { date: now, value };
+            this.sensorValues['RPM'] = value;
+            this.updateRPMStatus();
+          }
 
           this.recentHistory = Object.entries(this.historyMap).map(([sensorName, { date, value }]) => ({
             sensorName,
@@ -151,5 +170,28 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
   sendToViewMore(event: Event) {
     event.preventDefault();
     this.router.navigate(['dashboard-docente/sensores']);
+  }
+
+  get rpmPercentage(): number {
+    const currentRPM = Number(this.sensorValues['RPM']) || 0;
+    return currentRPM / this.maxRPM;
+  }
+
+  updateRPMStatus() {
+    const rpm = Number(this.sensorValues['RPM']) || 0;
+
+    if (rpm > this.maxRPM * 0.8) {
+      this.rpmStatus = 'danger';
+    } else if (rpm > this.maxRPM * 0.6) {
+      this.rpmStatus = 'warning';
+    } else {
+      this.rpmStatus = 'normal';
+    }
+
+    if (rpm > this.maxRecordedRPM) {
+      this.maxRecordedRPM = rpm;
+    }
+
+    this.avgRPM = Math.round((this.avgRPM * 0.9) + (rpm * 0.1));
   }
 }
