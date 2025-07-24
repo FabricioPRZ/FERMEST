@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NotificationService } from './notification.service';
+import { NotificationService1 } from './notification.service';
 
 export type DeviceId =
   | 'alcohol' | 'temperatura' | 'ph' | 'turbidez'
@@ -7,7 +7,7 @@ export type DeviceId =
 
 @Injectable({ providedIn: 'root' })
 export class CommandService {
-  constructor(private ws: NotificationService) {}
+  constructor(private ws: NotificationService1) {}
 
   switch(device: DeviceId, on: boolean): void {
     const payload = {

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { Subscription } from 'rxjs';
-import { NotificationService } from '../../../services/notification.service';
+import { NotificationService1 } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-temperature-chart',
@@ -11,7 +11,6 @@ import { NotificationService } from '../../../services/notification.service';
   styleUrls: ['./temperature-chart.component.scss'],
   templateUrl: './temperature-chart.component.html'
 })
-
 export class TemperatureChartComponent implements OnInit, OnDestroy {
   private sub!: Subscription;
   
@@ -19,19 +18,17 @@ export class TemperatureChartComponent implements OnInit, OnDestroy {
   public values: number[] = [];
   public lastValue: number = 0;
   public lastUpdate: string = '';
-  
-  private chartInstance: any;
 
   chartOptions: any = {
     tooltip: { trigger: 'axis' },
-    xAxis: { 
-      type: 'category', 
-      boundaryGap: false, 
-      data: [] 
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: []
     },
-    yAxis: { 
-      type: 'value', 
-      name: '°C' 
+    yAxis: {
+      type: 'value',
+      name: '°C'
     },
     series: [{
       name: 'Temp.',
@@ -47,87 +44,16 @@ export class TemperatureChartComponent implements OnInit, OnDestroy {
   updateOptions: any = {};
 
   constructor(
-    private notifService: NotificationService,
+    private notifService: NotificationService1,
     private cdr: ChangeDetectorRef
   ) {}
+ngOnInit(): void {
+  console.log('🚀 Componente iniciado');
 
-  onChartInit(chart: any): void {
-    this.chartInstance = chart;
-    console.log('📊 Gráfico inicializado:', this.chartInstance);
-  }
-
-  addTestData(): void {
-    const testTemp = Math.random() * 30 + 15; 
-    const testTime = new Date().toLocaleTimeString('es-MX', { hour12: false });
-    
-    console.log('🧪 Agregando dato de prueba:', { temperatura: testTemp, tiempo: testTime });
-    
-    this.addDataPoint(testTemp, testTime);
-  }
-
-  private addDataPoint(temperatura: number, tiempo: string): void {
-    this.labels.push(tiempo);
-    this.values.push(temperatura);
-    this.lastValue = temperatura;
-    this.lastUpdate = new Date().toLocaleTimeString();
-
-    // Limitar datos
-    if (this.labels.length > 20) {
-      this.labels.shift();
-      this.values.shift();
-    }
-
-    console.log('📊 Datos actualizados:', {
-      labels: this.labels,
-      values: this.values,
-      labelsLength: this.labels.length,
-      valuesLength: this.values.length
-    });
-
-    // Método 1: Usar merge
-    this.updateOptions = {
-      xAxis: { data: [...this.labels] },
-      series: [{ data: [...this.values] }]
-    };
-
-    // Método 2: Usar instancia directamente
-    if (this.chartInstance) {
-      try {
-        this.chartInstance.setOption({
-          xAxis: { data: [...this.labels] },
-          series: [{ data: [...this.values] }]
-        });
-        console.log('✅ Gráfico actualizado via instancia');
-      } catch (error) {
-        console.error('❌ Error actualizando via instancia:', error);
-      }
-    }
-
-    this.chartOptions = {
-      ...this.chartOptions,
-      xAxis: { 
-        ...this.chartOptions.xAxis, 
-        data: [...this.labels] 
-      },
-      series: [{
-        ...this.chartOptions.series[0],
-        data: [...this.values]
-      }]
-    };
-
-    // Forzar detección de cambios
-    this.cdr.detectChanges();
-    
-    console.log('🔄 Detección de cambios forzada');
-  }
-
-  ngOnInit(): void {
-    console.log('🚀 Componente iniciado');
-    
-    this.sub = this.notifService.listenForNotifications().subscribe((msg: any) => {
+  this.sub = this.notifService.listenForNotifications().subscribe((msg: any) => {
     console.log('📩 Mensaje recibido:', msg);
 
-    const temperatura = msg.temperatura ?? msg.data?.temperatura;
+    const temperatura = msg.temperature;
 
     if (typeof temperatura === 'number') {
       const time = new Date().toLocaleTimeString('es-MX', { hour12: false });
@@ -137,20 +63,42 @@ export class TemperatureChartComponent implements OnInit, OnDestroy {
     }
   });
 
-
-    setTimeout(() => {
-      console.log('🔄 Agregando datos iniciales...');
-      this.addTestData();
-      
-      setTimeout(() => this.addTestData(), 1000);
-      setTimeout(() => this.addTestData(), 2000);
-    }, 1000);
-  }
+  setTimeout(() => {
+    this.addTestData();
+    setTimeout(() => this.addTestData(), 1000);
+    setTimeout(() => this.addTestData(), 2000);
+  }, 1000);
+}
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
-    if (this.chartInstance) {
-      this.chartInstance.dispose();
+  }
+
+  onChartInit(chart: any): void {
+    console.log('📊 Gráfico inicializado:', chart);
+  }
+
+  addTestData(): void {
+    const testTemp = Math.random() * 30 + 15;
+    const testTime = new Date().toLocaleTimeString('es-MX', { hour12: false });
+    console.log('🧪 Agregando dato de prueba:', { temperatura: testTemp, tiempo: testTime });
+    this.addDataPoint(testTemp, testTime);
+  }
+
+  private addDataPoint(temperatura: number, tiempo: string): void {
+    this.labels.push(tiempo);
+    this.values.push(temperatura);
+    this.lastValue = temperatura;
+    this.lastUpdate = new Date().toLocaleTimeString();
+
+    if (this.labels.length > 20) {
+      this.labels.shift();
+      this.values.shift();
     }
+
+    this.updateOptions = {
+      xAxis: { data: [...this.labels] },
+      series: [{ data: [...this.values] }]
+    };
   }
 }

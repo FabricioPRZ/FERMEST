@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class NotificationService {
+export class NotificationService1 {
   private ws!: WebSocket;
   private isConnected = false;
   private isConnecting = false;
 
   readonly userId = 1;
   private readonly sessionId = this.userId;
+  private readonly code = 200;
 
   private messages$ = new Subject<any>();
 
@@ -21,7 +22,7 @@ export class NotificationService {
 
     this.isConnecting = true;
     this.ws = new WebSocket(
-      `ws://localhost/ws?user_id=${this.userId}&session_id=${this.sessionId}`
+      `ws://34.196.95.251:8082/ws?user_id=${this.userId}&session_id=${this.sessionId}&code=${this.code}`
     );
 
     this.ws.onopen = () => {
@@ -56,10 +57,14 @@ export class NotificationService {
   private registerUser() {
     const payload = {
       action: 'registrarUsuario',
-      data: { clientId: this.userId, sessionId: this.sessionId }
+      data: {
+        clientId: this.userId,
+        sessionId: this.sessionId,
+        code: this.code
+      }
     };
     this.send(payload);
-    console.log('👤 Usuario registrado:', this.userId);
+    console.log('👤 Usuario registrado:', this.userId, 'con código:', this.code);
   }
 
   listenForNotifications(): Observable<any> {

@@ -10,34 +10,35 @@
   </h2>
   <div class="stats-preview">
         <app-card-sensores 
-          icono="icons/temperature.svg"
-          dato="27° C"
-          nameSensor="Temperatura DS18B20">
-        </app-card-sensores>
+  icono="icons/temperature.svg"
+  [dato]="sensorValues['Temperatura'] || '---'"
+  nameSensor="Temperatura DS18B20">
+</app-card-sensores>
 
-        <app-card-sensores 
-          icono="icons/flask.svg"
-          dato="55°"
-          nameSensor="Nivel de alcohol MQ3">
-        </app-card-sensores>
-        
-        <app-card-sensores 
-          icono="icons/droplet.svg"
-          dato="7 Estable"
-          nameSensor="Nivel de PH">
-        </app-card-sensores>
+<app-card-sensores 
+  icono="icons/flask.svg"
+  [dato]="sensorValues['Alcohol'] || '---'"
+  nameSensor="Nivel de alcohol MQ3">
+</app-card-sensores>
 
-        <app-card-sensores 
-          icono="icons/voltage.svg"
-          dato="5.3 V"
-          nameSensor="Conductividad">
-        </app-card-sensores>
+<app-card-sensores 
+  icono="icons/droplet.svg"
+  [dato]="sensorValues['pH'] || '---'"
+  nameSensor="Nivel de PH">
+</app-card-sensores>
 
-        <app-card-sensores 
-          icono="icons/cloudy.svg"
-          dato="3 Contaminada"
-          nameSensor="Turbidez">
-        </app-card-sensores>
+<app-card-sensores 
+  icono="icons/voltage.svg"
+  [dato]="sensorValues['Conductividad'] || '---'"
+  nameSensor="Conductividad">
+</app-card-sensores>
+
+<app-card-sensores 
+  icono="icons/cloudy.svg"
+  [dato]="sensorValues['Turbidez'] || '---'"
+  nameSensor="Turbidez">
+</app-card-sensores>
+
   </div>
 </section>
 
