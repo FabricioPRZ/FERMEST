@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FermentationService } from '../../../services/fermentation/fermentation.service';
+import { Fermentation } from '../../../interfaces/fermentation';
 
 @Component({
   selector: 'app-fermentation-student',
@@ -7,29 +9,42 @@ import { Component } from '@angular/core';
   templateUrl: './fermentation-student.component.html',
   styleUrl: './fermentation-student.component.scss'
 })
-export class FermentationStudentComponent {
-  fermentations = [
-    {
-      name: 'Lote A',
-      startDate: new Date('2025-07-10T08:30:00'),
-      duration: '72 horas',
-      status: 'en proceso',
-    },
-    {
-      name: 'Lote B',
-      startDate: new Date('2025-07-05T14:00:00'),
-      duration: '48 horas',
-      status: 'finalizado',
-    },
-    {
-      name: 'Lote C',
-      startDate: new Date('2025-07-12T09:00:00'),
-      duration: 'Pendiente',
-      status: 'pendiente',
-    },
-  ];
 
-  getStatusClass(status: string): string {
+export class FermentationStudentComponent implements OnInit {
+  fermentations: Fermentation[] = [];
+  loading = false;
+  error = '';
+
+  constructor(private fermentationService: FermentationService) {}
+
+  ngOnInit(): void {
+    this.loadFermentations();
+  }
+
+  loadFermentations(): void {
+    const userId = Number(localStorage.getItem('userId'));
+
+    if (!userId) {
+      this.error = 'ID de usuario no encontrado en localStorage';
+      return;
+    }
+
+    this.loading = true;
+    this.fermentationService.getAll(userId).subscribe({
+      next: (data) => {
+        this.fermentations = data ?? [];
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar fermentaciones:', err);
+        this.error = 'Error al cargar fermentaciones';
+        this.loading = false;
+      },
+    });
+  }
+
+  getStatusClass(status?: string): string {
+    if (!status) return '';
     return {
       'finalizado': 'status-finalizado',
       'en proceso': 'status-en-proceso',

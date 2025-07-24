@@ -33,11 +33,7 @@ export class AddUsersComponent implements OnInit {
   loadUsers(): void {
     this.userService.getAllUsers().subscribe({
       next: (users) => {
-        console.log('Usuarios recibidos:', users);
         this.usuarios = Array.isArray(users) ? users : [];
-        if (!Array.isArray(users)) {
-          console.warn('La respuesta no es un array:', users);
-        }
       },
       error: (err) => {
         console.error('Error al cargar usuarios', err);
@@ -49,8 +45,29 @@ export class AddUsersComponent implements OnInit {
   openModal(index: number | null = null): void {
     this.isEditing = index !== null;
     this.currentUserIndex = index;
-    this.selectedUserData = index !== null ? { ...this.usuarios[index] } : null;
-    this.showModal = true;
+
+    if (index !== null) {
+      const userId = this.usuarios[index]?.id;
+      if (userId !== undefined && userId !== null) {
+        this.userService.getUserById(userId).subscribe({
+          next: (userData) => {
+            this.selectedUserData = userData;
+            this.showModal = true;
+          },
+          error: (err) => {
+            console.error('Error al obtener datos del usuario para editar', err);
+            this.selectedUserData = null;
+            this.showModal = true;
+          }
+        });
+      } else {
+        this.selectedUserData = null;
+        this.showModal = true;
+      }
+    } else {
+      this.selectedUserData = null;
+      this.showModal = true;
+    }
   }
 
   closeModal(): void {
@@ -59,12 +76,23 @@ export class AddUsersComponent implements OnInit {
     this.currentUserIndex = null;
   }
 
-onUserSubmitted(user: User & { password?: string }): void {
-  
+  onUserSubmitted(user: User & { password?: string }): void {
   if (this.isEditing && this.currentUserIndex !== null) {
-    const id = this.usuarios[this.currentUserIndex].id;
-    if (id !== undefined && id !== null) {
-      this.userService.updateUser(id, user).subscribe({
+    const id = this.usuarios[this.currentUserIndex]?.id;
+
+    if (id !== undefined) {
+      // Construir nuevo objeto excluyendo el email si no cambió
+      const updatedUser: any = { ...user };
+      if (this.selectedUserData?.email === user.email) {
+        // No incluir el email en la petición si no cambió
+        delete updatedUser.email;
+      }
+
+      if (!user.password) {
+        delete updatedUser.password;
+      }
+
+      this.userService.updateUser(id, updatedUser).subscribe({
         next: () => this.loadUsers(),
         error: (err) => console.error('Error al actualizar usuario', err),
       });
@@ -75,8 +103,10 @@ onUserSubmitted(user: User & { password?: string }): void {
       error: (err) => console.error('Error al crear usuario', err),
     });
   }
+
   this.closeModal();
 }
+
 
 
   deleteUser(index: number): void {

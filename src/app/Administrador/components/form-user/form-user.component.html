@@ -1,6 +1,6 @@
 <h2 class="form-title">Formulario de Usuario</h2>
 
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form" novalidate>
   <div class="form-grid">
     <div class="form-group">
       <label for="name">Nombre</label>
@@ -25,7 +25,7 @@
         formControlName="password"
         placeholder="••••••"
       />
-      <span class="toggle-password" (click)="showPassword = !showPassword">
+      <span class="toggle-password" (click)="showPassword = !showPassword" style="cursor:pointer;">
         <img src="icons/eye.png" alt="Ver contraseña" />
       </span>
     </div>
@@ -38,7 +38,7 @@
         formControlName="verifyPassword"
         placeholder="••••••"
       />
-      <span class="toggle-password" (click)="showVerifyPassword = !showVerifyPassword">
+      <span class="toggle-password" (click)="showVerifyPassword = !showVerifyPassword" style="cursor:pointer;">
         <img src="icons/eye.png" alt="Ver contraseña" />
       </span>
     </div>
@@ -47,9 +47,9 @@
       <label for="role">Rol</label>
       <select id="role" formControlName="role">
         <option value="">Selecciona un rol</option>
-      <option [value]="1">Administrador</option>
-      <option [value]="2">Estudiante</option>
-      <option [value]="3">Docente</option>
+        <option [value]="3">Administrador</option>
+        <option [value]="1">Estudiante</option>
+        <option [value]="2">Docente</option>
       </select>
     </div>
   </div>

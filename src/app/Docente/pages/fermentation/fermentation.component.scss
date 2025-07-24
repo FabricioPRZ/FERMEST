@@ -136,3 +136,34 @@
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+ .download-btn {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #1565c0;
+    }
+  }
+
+  .status-iniciado {
+  color: #2196f3;
+  font-weight: bold;
+}
+.status-en-proceso {
+  color: #ff9800;
+  font-weight: bold;
+}
+.status-finalizado {
+  color: #4caf50; 
+  font-weight: bold;
+}
+.status-pendiente {
+  color: #9e9e9e; 
+  font-weight: bold;
+}

@@ -15,6 +15,7 @@
       <th>Fecha de Inicio</th>
       <th>Duración</th>
       <th>Estado</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -22,17 +23,24 @@
       <td>{{ i + 1 }}</td>
       <td>{{ fermentation.raw_material }}</td>
       <td>{{ fermentation.started_at | date: 'dd/MM/yyyy HH:mm' }}</td>
-      <td>{{ fermentation.duration_hours }} horas</td>
+      <td>{{ fermentation.duration_hours }} Horas</td>
       <td>
-       <span [ngClass]="getStatusClass(fermentation.status)">
+        <span [ngClass]="getStatusClass(fermentation.status)">
           {{ fermentation.status }}
-       </span>
+        </span>
+      </td>
+      <td>
+        <button 
+  class="download-btn"
+  (click)="generateReport(fermentation)" 
+  [disabled]="fermentation.status?.toLowerCase() !== 'finalizado'">
+  Descargar
+</button>
 
       </td>
     </tr>
   </tbody>
 </table>
-
 
 <div *ngIf="fermentations.length === 0" class="no-records">
   No hay fermentaciones registradas aún.

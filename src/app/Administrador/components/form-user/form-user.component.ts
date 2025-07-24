@@ -24,8 +24,8 @@ export class FormUserComponent implements OnChanges {
       lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       role: [null, Validators.required],
-      password: [''],         
-      verifyPassword: [''],    
+      password: [''],
+      verifyPassword: [''],
     }, { validators: this.passwordMatchValidator });
   }
 
@@ -70,7 +70,7 @@ export class FormUserComponent implements OnChanges {
       if (!formValue.password) {
         delete formValue.password;
       }
-      delete formValue.verifyPassword; 
+      delete formValue.verifyPassword;
       this.submitted.emit(formValue);
       this.userForm.reset();
     }

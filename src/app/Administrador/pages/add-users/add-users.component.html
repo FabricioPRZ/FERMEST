@@ -23,7 +23,9 @@
       <td>{{ user.name }}</td>
       <td>{{ user.lastName }}</td>
       <td>{{ user.email }}</td>
-      <td>{{ user.role }}</td>
+      <td>
+        {{ user.role === 3 ? 'Administrador' : user.role === 2 ? 'Docente' : 'Estudiante' }}
+      </td>
       <td>
         <button class="edit-btn" (click)="openModal(i)">Editar</button>
         <button class="delete-btn" (click)="deleteUser(i)">Eliminar</button>
@@ -35,7 +37,7 @@
 <div class="pagination">
   <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">‹</button>
   <button
-    *ngFor="let page of [].constructor(totalPages()); let i = index"
+    *ngFor="let _ of [].constructor(totalPages()); let i = index"
     [class.active]="i + 1 === currentPage"
     (click)="changePage(i + 1)">
     {{ i + 1 }}
@@ -49,7 +51,7 @@
     <app-form-user
       [userData]="selectedUserData"
       (submitted)="onUserSubmitted($event)"
-      (cancelled)="closeModal()">
-    </app-form-user>
+      (cancelled)="closeModal()"
+    ></app-form-user>
   </div>
 </div>

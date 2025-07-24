@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, NgZone } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 import { ControlCardComponent } from '../../components/control-card/control-card.component';
 import { HistoryCardComponent } from '../../components/history-card/history-card.component';
+import { CardSensoresComponent } from "../../components/card-sensores/card-sensores.component";
+
 import { SensorStateService, DeviceId } from '../../services/sensor-state.service';
 import { CommandService } from '../../services/command.service';
-import { Subscription } from 'rxjs';
-import { CardSensoresComponent } from "../../components/card-sensores/card-sensores.component";
-import { Router } from '@angular/router';
 import { NotificationService } from '../../../services/notification.service';
 import { NotificationService1 } from '../../services/notification.service';
 
@@ -20,25 +21,9 @@ import { NotificationService1 } from '../../services/notification.service';
   styleUrls: ['./principal-page.component.scss']
 })
 export class PrincipalPageComponent implements OnInit, OnDestroy {
-  private historyMap: { [sensorName: string]: { date: Date, value: string } } = {
-    'Temperatura': { date: new Date('2025-07-01'), value: '27 °C' },
-    'Alcohol': { date: new Date('2025-07-01'), value: '0.45 ppm' },
-    'pH': { date: new Date('2025-06-30'), value: '6.8' },
-    'Turbidez': { date: new Date('2025-06-30'), value: '12 NTU' },
-    'Conductividad': { date: new Date('2025-06-29'), value: '1200 mS/cm' },
-    'RPM': { date: new Date('2025-07-01'), value: '3200 RPM' }
-  };
-
-  sensorValues: { [sensorName: string]: string } = {
-    'Temperatura': '27 °C',
-    'Alcohol': '0.45 ppm',
-    'pH': '6.8',
-    'Turbidez': '12 NTU',
-    'Conductividad': '1200 mS/cm',
-    'RPM': '3200'
-  };
-
-  recentHistory: { sensorName: string, date: string, value: string }[] = [];
+  private historyMap: Record<string, { date: Date; value: string }> = {};
+  sensorValues: Record<string, string> = {};
+  recentHistory: { sensorName: string; date: string; value: string }[] = [];
 
   devicesPreview = [
     { id: 'sensores', title: 'Manipulación de sensores', description: 'Controla todos los sensores en general.' },
@@ -47,9 +32,10 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
   ];
 
   maxRPM = 8000;
-  maxRecordedRPM = 4500;
-  avgRPM = 3800;
+  maxRecordedRPM = 0;
+  avgRPM = 0;
   rpmStatus = 'normal';
+
   gaugeMarks = [
     { angle: 0.25, value: 0, showValue: true },
     { angle: 0.325, value: 2000, showValue: false },
@@ -80,12 +66,6 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.recentHistory = Object.entries(this.historyMap).map(([sensorName, { date, value }]) => ({
-      sensorName,
-      date: date.toISOString().split('T')[0],
-      value
-    }));
-
     this.sub = this.sensorState.observe(states => {
       this.sensorStates = states;
     });
@@ -96,35 +76,16 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
           const now = new Date();
           console.log('🎯 Datos recibidos WS:', data);
 
-          if ('temperature' in data) {
-            const value = `${data.temperature} °C`;
-            this.historyMap['Temperatura'] = { date: now, value };
-            this.sensorValues['Temperatura'] = value;
+          for (const [key, rawValue] of Object.entries(data)) {
+            const { normalizedKey, formattedValue } = this.normalizeSensorData(key, rawValue);
+
+            if (!normalizedKey) continue; // ignora campos no reconocidos
+
+            this.sensorValues[normalizedKey] = formattedValue;
+            this.historyMap[normalizedKey] = { date: now, value: formattedValue };
           }
-          if ('alcohol_concentration' in data) {
-            const value = `${data.alcohol_concentration} ppm`;
-            this.historyMap['Alcohol'] = { date: now, value };
-            this.sensorValues['Alcohol'] = value;
-          }
-          if ('ph_value' in data) {
-            const value = `${data.ph_value}`;
-            this.historyMap['pH'] = { date: now, value };
-            this.sensorValues['pH'] = value;
-          }
-          if ('turbidity' in data) {
-            const value = `${data.turbidity} NTU`;
-            this.historyMap['Turbidez'] = { date: now, value };
-            this.sensorValues['Turbidez'] = value;
-          }
-          if ('conductivity' in data) {
-            const value = `${data.conductivity} mS/cm`;
-            this.historyMap['Conductividad'] = { date: now, value };
-            this.sensorValues['Conductividad'] = value;
-          }
-          if ('rpm' in data) {
-            const value = `${data.rpm}`;
-            this.historyMap['RPM'] = { date: now, value };
-            this.sensorValues['RPM'] = value;
+
+          if ('RPM' in this.sensorValues) {
             this.updateRPMStatus();
           }
 
@@ -177,7 +138,7 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
     return currentRPM / this.maxRPM;
   }
 
-  updateRPMStatus() {
+  updateRPMStatus(): void {
     const rpm = Number(this.sensorValues['RPM']) || 0;
 
     if (rpm > this.maxRPM * 0.8) {
@@ -193,5 +154,32 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
     }
 
     this.avgRPM = Math.round((this.avgRPM * 0.9) + (rpm * 0.1));
+  }
+
+  private normalizeSensorData(key: string, value: any): { normalizedKey: string | null; formattedValue: string } {
+    switch (key.toLowerCase()) {
+      case 'temperature':
+      case 'temperatura':
+        return { normalizedKey: 'Temperatura', formattedValue: `${value} °C` };
+      case 'alcohol_concentration':
+      case 'alcohol':
+        return { normalizedKey: 'Alcohol', formattedValue: `${value} ppm` };
+      case 'ph_value':
+      case 'ph':
+        return { normalizedKey: 'pH', formattedValue: String(value) };
+      case 'turbidity':
+      case 'turbuidez':
+        return { normalizedKey: 'Turbidez', formattedValue: `${value} NTU` };
+      case 'conductivity':
+      case 'conductividad':
+        return { normalizedKey: 'Conductividad', formattedValue: `${value} mS/cm` };
+      case 'density':
+      case 'densidad':
+        return { normalizedKey: 'Densidad', formattedValue: String(value) };
+      case 'rpm':
+        return { normalizedKey: 'RPM', formattedValue: String(value) };
+      default:
+        return { normalizedKey: null, formattedValue: '' }; // clave no reconocida
+    }
   }
 }

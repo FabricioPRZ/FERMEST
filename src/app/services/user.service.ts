@@ -23,12 +23,14 @@ export class UserService {
       })
     );
   }
-
 getAllUsers(): Observable<User[]> {
-    return this.http.get<{ users: User[] }>(`${this.apiUrl}/clients`).pipe(
-      map(response => response.users || [])
-    );
-  }
+  return this.http.get<{ users: User[] }>(`${this.apiUrl}/clients`, {
+    headers: this.getHeaders()
+  }).pipe(
+    map(response => response.users || [])
+  );
+}
+
 
 
   register(user: User): Observable<User> {
@@ -36,6 +38,13 @@ getAllUsers(): Observable<User[]> {
       headers: this.getHeaders()
     });
   }
+
+  getUserById(userId: number): Observable<User> {
+  return this.http.get<User>(`${this.apiUrl}/clients/${userId}`, {
+    headers: this.getHeaders()
+  });
+}
+
 
   getUser(): Observable<User> {
     const userId = localStorage.getItem('userId');
