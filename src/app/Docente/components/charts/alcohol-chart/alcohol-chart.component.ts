@@ -136,9 +136,9 @@ export class AlcoholChartComponent implements OnInit, OnDestroy {
 
     this.chartOptions = {
       ...this.chartOptions,
-      xAxis: {
-        ...this.chartOptions.xAxis,
-        data: [...this.labels]
+      xAxis: { 
+        ...this.chartOptions.xAxis, 
+        data: [...this.labels] 
       },
       series: [{
         ...this.chartOptions.series[0],

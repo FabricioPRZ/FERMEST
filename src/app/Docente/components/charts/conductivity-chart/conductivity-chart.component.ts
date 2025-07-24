@@ -30,7 +30,8 @@ export class ConductivityChartComponent implements OnInit, OnDestroy {
       }
     },
     xAxis: { type: 'category', boundaryGap: false, data: [] },
-    yAxis: { type: 'value', name: 'mS/cm', min: 0 },
+
+    yAxis: { type: 'value', name: 'TDS (mg/L)', min: 0, max: 10 },
     series: [{
       name: 'Conductividad',
       type: 'line',
