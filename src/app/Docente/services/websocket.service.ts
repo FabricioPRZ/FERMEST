@@ -22,9 +22,7 @@ export class WebsocketService {
     if (this.isConnected || this.isConnecting) return;
 
     this.isConnecting = true;
-    this.ws = new WebSocket(
-      `wss://fermest-ws.it2id.cc/ws?user_id=${this.userId}&session_id=${this.sessionId}`
-    );
+    this.ws = new WebSocket(`wss://fermest-ws.it2id.cc/ws?user_id=${this.userId}&session_id=${this.sessionId}`);
 
     this.ws.onopen = () => {
       console.log('✅ WebSocket conectado');
