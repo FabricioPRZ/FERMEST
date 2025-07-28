@@ -34,68 +34,6 @@
     Estado del Motor
     <img class="section-icon" src="icons/engine.png" alt="Ícono motor" />
   </h2>
-
-  <div class="rpm-container">
-    <div class="rpm-visualization">
-      <div class="rpm-gauge-wrapper">
-        <div class="rpm-gauge">
-          <div class="gauge-body">
-            <div class="gauge-markings">
-              <div class="marking" *ngFor="let mark of gaugeMarks" [style.transform]="'rotate(' + mark.angle + 'turn)'">
-                <span class="mark-value" *ngIf="mark.showValue">{{mark.value}}</span>
-              </div>
-            </div>
-            <div class="gauge-fill" [style.transform]="'rotate(' + (0.5 * rpmPercentage) + 'turn)'"></div>
-            <div class="gauge-cover">
-              <div class="rpm-value">{{ sensorValues['RPM'] || '0' }}</div>
-              <div class="rpm-unit">RPM</div>
-              <div class="rpm-needle" [style.transform]="'rotate(' + (0.5 * rpmPercentage) + 'turn)'"></div>
-            </div>
-          </div>
-          <div class="gauge-range">
-            <span>0</span>
-            <span>{{ maxRPM }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="rpm-bar-container">
-        <div class="rpm-bar" [style.width]="(rpmPercentage * 100) + '%'"></div>
-        <div class="rpm-bar-labels">
-          <span>Bajo</span>
-          <span>Medio</span>
-          <span>Alto</span>
-          <span>Máximo</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="rpm-stats">
-      <div class="stat-card" [class.active]="rpmStatus === 'normal'">
-        <div class="stat-icon">🚀</div>
-        <div class="stat-content">
-          <span class="stat-label">Máximo Registrado</span>
-          <span class="stat-value">{{ maxRecordedRPM }} RPM</span>
-        </div>
-      </div>
-
-      <div class="stat-card" [class.active]="rpmStatus === 'warning'">
-        <div class="stat-icon">📊</div>
-        <div class="stat-content">
-          <span class="stat-label">Promedio</span>
-          <span class="stat-value">{{ avgRPM }} RPM</span>
-        </div>
-      </div>
-
-      <div class="stat-card" [class.warning]="rpmStatus === 'warning'" [class.danger]="rpmStatus === 'danger'">
-        <div class="stat-icon">⚠️</div>
-        <div class="stat-content">
-          <span class="stat-label">Estado Actual</span>
-          <span class="stat-value">{{ rpmStatus | uppercase }}</span>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <section class="dashboard-section">
