@@ -4,7 +4,14 @@
   background: #f5f5f5;
 }
 
-app-sidebar {
+.dashboard-main {
+  flex: 1;
+  padding: 40px 32px 32px 32px;
+  min-width: 0;
+}
+
+/* Mostrar/Ocultar componentes según resolución */
+.desktop-only {
   width: 350px;
   min-height: 100%;
   height: auto;
@@ -12,8 +19,62 @@ app-sidebar {
   z-index: 2;
 }
 
-.dashboard-main {
-  flex: 1;
-  padding: 40px 32px 32px 32px;
-  min-width: 0;
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+
+  .dashboard-layout {
+    padding-bottom: 70px; // Espacio para el menú inferior
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #034359;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+
+  .bottom-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+  }
+
+  .bottom-list li {
+    text-align: center;
+    flex: 1;
+    color: white;
+    font-size: 0.8rem;
+  }
+
+  .bottom-list li img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+  }
+
+  .bottom-list li.active {
+    background: #1793b2;
+    border-radius: 8px;
+  }
+
+  .bottom-list li span {
+    display: block;
+    font-size: 0.75rem;
+  }
 }

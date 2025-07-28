@@ -22,7 +22,7 @@ export class NotificationService1 {
 
     this.isConnecting = true;
     this.ws = new WebSocket(
-      `ws://34.196.95.251:8082/ws?user_id=${this.userId}&session_id=${this.sessionId}&code=${this.code}`
+      `https://fermest-ws.it2id.cc/ws?user_id=${this.userId}&session_id=${this.sessionId}&code=${this.code}`
     );
 
     this.ws.onopen = () => {

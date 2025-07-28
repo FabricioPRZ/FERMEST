@@ -133,3 +133,59 @@
         }
     }
 }
+
+/* Responsive Design */
+@media (max-width: 700px) {
+    .notification-modal {
+        right: 0;
+        left: 0;
+        top: 60px;
+        width: 98vw;
+        max-width: 98vw;
+        border-radius: 0 0 16px 16px;
+    }
+    .modal-header,
+    .notifications-list .notification-item,
+    .modal-footer {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .modal-header h3 {
+        font-size: 1rem;
+    }
+    .notifications-list .notification-content h4 {
+        font-size: 0.95rem;
+    }
+    .notifications-list .notification-content p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .notification-modal {
+        top: 48px;
+        width: 100vw;
+        max-width: 100vw;
+        min-width: unset;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    }
+    .modal-header,
+    .notifications-list .notification-item,
+    .modal-footer {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .modal-header h3 {
+        font-size: 0.95rem;
+    }
+    .notifications-list .notification-content h4 {
+        font-size: 0.9rem;
+    }
+    .notifications-list .notification-content p {
+        font-size: 0.8rem;
+    }
+    .modal-footer .view-all {
+        font-size: 0.85rem;
+    }
+}

@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 })
 export class NotificationService1 {
 
-  private baseUrl = 'http://54.227.133.179:8084/api/notifications';
+  private baseUrl = 'https://fermest-apin.it2id.cc/api/notifications';
 
   private _notifications$ = new BehaviorSubject<Notification[]>([]);
   public notifications$ = this._notifications$.asObservable();

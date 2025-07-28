@@ -7,13 +7,13 @@ import { map, Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://3.226.201.85:8080';
+  private apiUrl = 'https://fermest-api.it2id.cc';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<{ role: number; token: string; userId: number }> {
     return this.http.post<{ role: number; token: string; userId: number }>(
-      `${this.apiUrl}/login`, 
+      `${this.apiUrl}/login`,
       { email, password }
     ).pipe(
       tap(response => {
@@ -23,13 +23,13 @@ export class UserService {
       })
     );
   }
-getAllUsers(): Observable<User[]> {
-  return this.http.get<{ users: User[] }>(`${this.apiUrl}/clients`, {
-    headers: this.getHeaders()
-  }).pipe(
-    map(response => response.users || [])
-  );
-}
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<{ users: User[] }>(`${this.apiUrl}/clients`, {
+      headers: this.getHeaders()
+    }).pipe(
+      map(response => response.users || [])
+    );
+  }
 
 
 
@@ -40,10 +40,10 @@ getAllUsers(): Observable<User[]> {
   }
 
   getUserById(userId: number): Observable<User> {
-  return this.http.get<User>(`${this.apiUrl}/clients/${userId}`, {
-    headers: this.getHeaders()
-  });
-}
+    return this.http.get<User>(`${this.apiUrl}/clients/${userId}`, {
+      headers: this.getHeaders()
+    });
+  }
 
 
   getUser(): Observable<User> {

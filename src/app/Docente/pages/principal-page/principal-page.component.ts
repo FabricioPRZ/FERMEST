@@ -55,15 +55,7 @@ export class PrincipalPageComponent implements OnInit, OnDestroy {
     private notificationService: NotificationService,
     private notificationService1: NotificationService1,
     private zone: NgZone
-  ) {
-    this.notificationService.showToast('Mensaje de éxito', 'success');
-    this.notificationService.addNotification({
-      title: 'Alerta importante',
-      message: 'Se ha detectado un problema en el sistema',
-      type: 'error',
-      route: '/dashboard/alerts'
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.sub = this.sensorState.observe(states => {

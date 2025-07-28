@@ -1,7 +1,42 @@
 <app-loged-header></app-loged-header>
+
 <div class="dashboard-layout">
-  <app-sidebar></app-sidebar>
+  <!-- Sidebar visible solo en escritorio -->
+  <div class="desktop-only">
+    <app-sidebar></app-sidebar>
+  </div>
+
   <main class="dashboard-main">
     <router-outlet></router-outlet>
   </main>
 </div>
+
+<!-- Menú inferior visible solo en móviles -->
+<nav class="bottom-nav mobile-only">
+  <ul class="bottom-list">
+    <li [ngClass]="{'active': isActive('/dashboard-docente/inicio')}" (click)="goToInicio($event)">
+      <img src="/icons/casa.png" alt="Inicio">
+      <span>Inicio</span>
+    </li>
+    <li [ngClass]="{'active': isActive('/dashboard-docente/statistics')}" (click)="goToEstadisticas($event)">
+      <img src="/icons/estadisticas.png" alt="Estadísticas">
+      <span>Estadísticas</span>
+    </li>
+    <li [ngClass]="{'active': isActive('/dashboard-docente/sensores')}" (click)="goToSensores($event)">
+      <img src="/icons/sensor.png" alt="Sensores">
+      <span>Sensores</span>
+    </li>
+    <li [ngClass]="{'active': isActive('/dashboard-docente/history')}" (click)="goToHistorial($event)">
+      <img src="/icons/historial.png" alt="Historial">
+      <span>Historial</span>
+    </li>
+    <li [ngClass]="{'active': isActive('/dashboard-docente/calculator')}" (click)="goToCalculos($event)">
+      <img src="/icons/calculos.png" alt="Cálculos">
+      <span>Cálculos</span>
+    </li>
+    <li [ngClass]="{'active': isActive('/dashboard-docente/fermentation')}" (click)="goToFermentation($event)">
+      <img src="/icons/fermentacion.png" alt="Fermentación">
+      <span>Fermentación</span>
+    </li>
+  </ul>
+</nav>

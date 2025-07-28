@@ -11,12 +11,6 @@
       </h1>
       <p class="dashboard-subtitle">Visualización en tiempo real de los datos de los sensores</p>
     </div>
-    <div class="time-filter">
-      <button class="time-button active">24h</button>
-      <button class="time-button">7d</button>
-      <button class="time-button">30d</button>
-      <button class="time-button">Personalizado</button>
-    </div>
   </header>
 
   <div class="sensor-container">
@@ -71,11 +65,6 @@
         <div class="chart-actions">
           <button class="action-button">
             <svg class="action-icon" viewBox="0 0 24 24">
-              <path fill="currentColor" d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z" />
-            </svg>
-          </button>
-          <button class="action-button">
-            <svg class="action-icon" viewBox="0 0 24 24">
               <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,10.5A1.5,1.5 0 0,0 10.5,12A1.5,1.5 0 0,0 12,13.5A1.5,1.5 0 0,0 13.5,12A1.5,1.5 0 0,0 12,10.5M7.5,10.5A1.5,1.5 0 0,0 6,12A1.5,1.5 0 0,0 7.5,13.5A1.5,1.5 0 0,0 9,12A1.5,1.5 0 0,0 7.5,10.5M16.5,10.5A1.5,1.5 0 0,0 15,12A1.5,1.5 0 0,0 16.5,13.5A1.5,1.5 0 0,0 18,12A1.5,1.5 0 0,0 16.5,10.5Z" />
             </svg>
           </button>
@@ -88,22 +77,6 @@
       </div>
       <div class="chart-content">
         <router-outlet></router-outlet>
-      </div>
-      <div class="chart-footer">
-        <div class="data-summary">
-          <div class="summary-item">
-            <span class="summary-label">Máximo:</span>
-            <span class="summary-value">28.5°C</span>
-          </div>
-          <div class="summary-item">
-            <span class="summary-label">Mínimo:</span>
-            <span class="summary-value">22.1°C</span>
-          </div>
-          <div class="summary-item">
-            <span class="summary-label">Promedio:</span>
-            <span class="summary-value">25.3°C</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>

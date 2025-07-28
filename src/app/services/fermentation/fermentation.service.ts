@@ -8,7 +8,7 @@ import { Fermentation } from '../../interfaces/fermentation';
   providedIn: 'root'
 })
 export class FermentationService {
-  private baseUrl = 'http://3.226.201.85:8080/api/fermentation';
+  private baseUrl = 'https://fermest-api.it2id.cc/api/fermentation';
 
   constructor(private http: HttpClient) {}
 

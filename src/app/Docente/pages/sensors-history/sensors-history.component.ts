@@ -51,14 +51,6 @@ export class SensorsHistoryComponent implements OnInit, OnDestroy {
       });
   }
 
-  refreshData() {
-    console.log('🔄 Actualizando datos manualmente...');
-  }
-
-  applyFilters() {
-    console.log('🔍 Aplicando filtros...');
-  }
-
   ngOnDestroy() {
     this.sub?.unsubscribe();
   }

@@ -1,15 +1,7 @@
 .control-card {
-  --primary-color: #4361ee;
-  --success-color: #4cc9f0;
-  --text-color: #2b2d42;
-  --text-light: #8d99ae;
-  --bg-color: #ffffff;
-  --border-color: #edf2f4;
-  --shadow-color: rgba(67, 97, 238, 0.1);
-  
-  background: var(--bg-color);
+  background: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 10px 20px var(--shadow-color);
+  box-shadow: 0 10px 20px rgba(67, 97, 238, 0.1);
   padding: 20px;
   display: flex;
   align-items: flex-start;
@@ -18,25 +10,25 @@
   width: 440px;
   min-height: 200px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border: 1px solid var(--border-color);
+  border: 1px solid #edf2f4;
   position: relative;
   overflow: visible;
-  
+
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 30px var(--shadow-color);
+    box-shadow: 0 15px 30px rgba(67, 97, 238, 0.1);
   }
 
   .card-icon {
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+    background: linear-gradient(135deg, #4361ee, #4cc9f0);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    
+
     svg {
       width: 24px;
       height: 24px;
@@ -61,13 +53,13 @@
   .card-title {
     font-weight: 600;
     font-size: 1.1rem;
-    color: var(--text-color);
+    color: #2b2d42;
     margin: 0;
   }
 
   .card-badge {
     background-color: #f8f9fa;
-    color: var(--text-light);
+    color: #8d99ae;
     font-size: 0.7rem;
     padding: 2px 8px;
     border-radius: 20px;
@@ -78,7 +70,7 @@
 
   .card-desc {
     font-size: 0.9rem;
-    color: var(--text-light);
+    color: #8d99ae;
     font-weight: 400;
     line-height: 1.5;
     margin: 0;
@@ -93,9 +85,9 @@
 
   .card-status {
     font-size: 0.8rem;
-    color: var(--text-light);
+    color: #8d99ae;
     font-weight: 500;
-    
+
     &:before {
       content: '';
       display: inline-block;
@@ -120,7 +112,7 @@
       opacity: 0;
       width: 0;
       height: 0;
-      
+
       &:focus + .slider {
         box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
       }
@@ -137,7 +129,7 @@
       border-radius: 34px;
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-      
+
       &:before {
         position: absolute;
         content: "";
@@ -154,7 +146,7 @@
     }
 
     .input:checked + .slider {
-      background-color: var(--primary-color);
+      background-color: #4361ee;
     }
 
     .input:checked + .slider:before {
@@ -167,7 +159,7 @@
       transform: translateY(-50%);
       transition: opacity 0.2s;
       z-index: 1;
-      
+
       svg {
         stroke: white;
       }
@@ -197,10 +189,119 @@
   }
 
   .input:checked ~ .card-content .card-status:before {
-    background-color: var(--primary-color);
+    background-color: #4361ee;
   }
 
   .input:checked ~ .card-content .card-status {
-    color: var(--primary-color);
+    color: #4361ee;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .control-card {
+    width: 98vw;
+    min-width: 220px;
+    max-width: 340px;
+    padding: 14px;
+    border-radius: 12px;
+    gap: 10px;
+    min-height: 140px;
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+    .card-title {
+      font-size: 1rem;
+    }
+    .card-desc {
+      font-size: 0.85rem;
+    }
+    .card-badge {
+      font-size: 0.65rem;
+      padding: 2px 6px;
+    }
+    .card-status {
+      font-size: 0.75rem;
+    }
+    .switch {
+      width: 40px;
+      height: 24px;
+      .slider:before {
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        bottom: 4px;
+      }
+      .input:checked + .slider:before {
+        transform: translateX(12px);
+      }
+      .slider-icon-on {
+        left: 4px;
+      }
+      .slider-icon-off {
+        right: 4px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .control-card {
+    width: 99vw;
+    min-width: 160px;
+    max-width: 99vw;
+    padding: 8px;
+    border-radius: 8px;
+    gap: 6px;
+    min-height: 90px;
+
+    .card-icon {
+      width: 28px;
+      height: 28px;
+
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+    .card-title {
+      font-size: 0.95rem;
+    }
+    .card-desc {
+      font-size: 0.8rem;
+    }
+    .card-badge {
+      font-size: 0.6rem;
+      padding: 1px 4px;
+    }
+    .card-status {
+      font-size: 0.7rem;
+    }
+    .switch {
+      width: 28px;
+      height: 18px;
+      .slider:before {
+        height: 10px;
+        width: 10px;
+        left: 3px;
+        bottom: 3px;
+      }
+      .input:checked + .slider:before {
+        transform: translateX(7px);
+      }
+      .slider-icon-on {
+        left: 2px;
+      }
+      .slider-icon-off {
+        right: 2px;
+      }
+    }
   }
 }

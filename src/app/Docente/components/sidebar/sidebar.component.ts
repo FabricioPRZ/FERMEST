@@ -37,11 +37,6 @@ export class SidebarComponent {
     this.router.navigate(['/dashboard-docente/fermentation']);
   }
 
-  goToReports(event: Event) {
-    event.preventDefault();
-    this.router.navigate(['/dashboard-docente/reports']);
-  }
-
   isActive(path: string): boolean {
     // Compara la ruta actual con el path recibido
     return this.router.url.startsWith(path);

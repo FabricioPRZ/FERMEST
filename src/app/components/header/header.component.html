@@ -2,17 +2,21 @@
   <div class="header-content">
     <div class="logo-container">
       <img src="logo-fermentador.png" alt="Logo" class="logo" />
-      <span class="brand-name">FERM-EST</span>
+      <span class="brand-name">FermEST</span>
     </div>
-    <nav class="nav-menu">
+    <nav class="nav-menu" [class.active]="mobileMenuOpen">
       <a class="nav-link" href="#inicio">Inicio</a>
       <a class="nav-link" href="#problematica">Problemática</a>
       <a class="nav-link" href="#innovacion">Innovación</a>
       <a class="nav-link" href="#funcion">¿Como Funciona?</a>
       <a class="nav-link" href="#contacto">Contacto</a>
-    </nav>
       <a class="nav-link login-btn" href="/login">Iniciar Sesión</a>
-    <button class="mobile-menu-btn" aria-label="Menú móvil">
+    </nav>
+    <button 
+      class="mobile-menu-btn" 
+      [class.active]="mobileMenuOpen"
+      (click)="toggleMobileMenu()" 
+      aria-label="Menú móvil">
       <span></span>
       <span></span>
       <span></span>

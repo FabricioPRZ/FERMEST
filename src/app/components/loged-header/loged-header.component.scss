@@ -142,7 +142,8 @@
   z-index: 1000;
 }
 
-.user-dropdown:hover .dropdown-menu {
+.user-dropdown:hover .dropdown-menu,
+.user-dropdown:focus-within .dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -176,21 +177,83 @@
   background-color: #ffebee;
 }
 
-/* Efecto para móviles */
-@media (max-width: 768px) {
-  .app-name {
-    display: none;
-  }
-  
-  .user-name {
-    display: none;
-  }
-  
+/* Responsive Design */
+@media (max-width: 1024px) {
   .header-container {
     padding: 0 16px;
   }
-  
+  .logo-img {
+    height: 40px;
+    width: 40px;
+  }
+  .app-name {
+    font-size: 1.1rem;
+  }
   .user-section {
     gap: 16px;
+  }
+  .user-img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .logged-header {
+    height: 60px;
+  }
+  .header-container {
+    padding: 0 8px;
+  }
+  .logo-img {
+    height: 32px;
+    width: 32px;
+  }
+  .app-name {
+    display: none;
+  }
+  .user-section {
+    gap: 10px;
+  }
+  .user-name {
+    display: none;
+  }
+  .user-avatar {
+    padding: 4px 6px;
+    gap: 6px;
+  }
+  .dropdown-arrow {
+    width: 16px;
+    height: 16px;
+  }
+  .dropdown-menu {
+    min-width: 140px;
+    font-size: 0.95rem;
+    right: 0;
+    left: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .logged-header {
+    height: 48px;
+  }
+  .header-container {
+    padding: 0 4px;
+  }
+  .logo-img {
+    height: 24px;
+    width: 24px;
+  }
+  .user-img {
+    width: 24px;
+    height: 24px;
+  }
+  .dropdown-menu {
+    min-width: 110px;
+    font-size: 0.9rem;
+  }
+  .dropdown-item {
+    padding: 8px 10px;
   }
 }

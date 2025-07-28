@@ -67,7 +67,7 @@
 .time-button.active {
   background: white;
   color: #1a5276;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .sensor-container {
@@ -123,7 +123,7 @@
 .chart-container {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
@@ -207,19 +207,131 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .time-filter {
     width: 100%;
     justify-content: space-between;
   }
-  
+
   .time-button {
     flex: 1;
     text-align: center;
   }
-  
+
   .data-summary {
     flex-direction: column;
     gap: 8px;
+  }
+}
+
+/* === Responsive para pantallas pequeñas (<480px) === */
+@media (max-width: 480px) {
+  .sensor-dashboard {
+    padding: 16px;
+  }
+
+  .dashboard-title {
+    font-size: 1.8rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .dashboard-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .chart-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .chart-title {
+    font-size: 1.2rem;
+  }
+
+  .chart-content {
+    padding: 12px;
+    min-height: 200px;
+  }
+
+  .sensor-tabs {
+    flex-direction: column;
+  }
+
+  .sensor-tab {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .data-summary {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .time-filter {
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .time-button {
+    width: 100%;
+  }
+}
+
+/* === Responsive para pantallas medianas (480px a 768px) === */
+@media (min-width: 480px) and (max-width: 768px) {
+  .sensor-dashboard {
+    padding: 20px;
+  }
+
+  .dashboard-title {
+    font-size: 2rem;
+  }
+
+  .dashboard-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .chart-header {
+    padding: 16px;
+  }
+
+  .chart-title {
+    font-size: 1.4rem;
+  }
+
+  .chart-content {
+    padding: 20px;
+    min-height: 350px;
+  }
+
+  .sensor-tabs {
+    flex-wrap: wrap;
+  }
+
+  .sensor-tab {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: center;
+  }
+
+  .data-summary {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .time-filter {
+    flex-direction: row;
+    gap: 8px;
+    width: auto;
+  }
+
+  .time-button {
+    flex: 1;
+    text-align: center;
   }
 }

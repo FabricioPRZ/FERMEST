@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 import { NotificationService1 } from '../../../services/notification.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { NotificationService1 } from '../../../services/notification.service';
 })
 export class PhChartComponent implements OnInit, OnDestroy {
   private sub!: Subscription;
+  private testInterval: any;
 
   public labels: string[] = [];
   public values: number[] = [];
@@ -36,7 +37,7 @@ export class PhChartComponent implements OnInit, OnDestroy {
         type: 'scatter',
         symbolSize: 12,
         itemStyle: {
-          color: '#8bc34a' 
+          color: '#8bc34a'
         },
         data: []
       },
@@ -45,7 +46,7 @@ export class PhChartComponent implements OnInit, OnDestroy {
         type: 'line',
         smooth: true,
         lineStyle: {
-          color: '#558b2f', 
+          color: '#558b2f',
           width: 2
         },
         data: []
@@ -61,24 +62,28 @@ export class PhChartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('🚀 Componente de pH iniciado');
 
+    // Simulación de datos de prueba
+    this.testInterval = setInterval(() => {
+      const simulatedPh = 7.01;
+      const time = new Date().toLocaleTimeString('es-MX', { hour12: false });
+      this.addDataPoint(simulatedPh, time);
+    }, 2000);
+
+    // Si quieres mantener el listener original, descomenta esto
+    /*
     this.sub = this.notifService.listenForNotifications().subscribe((msg: any) => {
-      console.log('📩 Mensaje recibido para pH:', msg);
-
       const ph = msg.ph_value ?? msg.ph;
-
-      console.log('Valor de pH extraído:', ph);
-
       if (typeof ph === 'number') {
         const time = new Date().toLocaleTimeString('es-MX', { hour12: false });
         this.addDataPoint(ph, time);
-      } else {
-        console.warn('⚠️ pH no es número:', ph);
       }
     });
+    */
   }
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+    clearInterval(this.testInterval);
   }
 
   private addDataPoint(ph: number, time: string): void {
@@ -94,8 +99,8 @@ export class PhChartComponent implements OnInit, OnDestroy {
       ...this.chartOptions,
       xAxis: { data: [...this.labels] },
       series: [
-        { ...this.chartOptions.series[0], data: [...this.values] }, 
-        { ...this.chartOptions.series[1], data: [...this.values] }  
+        { ...this.chartOptions.series[0], data: [...this.values] },
+        { ...this.chartOptions.series[1], data: [...this.values] }
       ]
     };
 

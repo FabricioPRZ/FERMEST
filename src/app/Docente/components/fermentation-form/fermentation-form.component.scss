@@ -3,6 +3,8 @@
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .form-grid {
@@ -24,6 +26,12 @@ label {
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+
+  input:focus {
+    border-color: #1e88e5;
+    outline: none;
   }
 }
 
@@ -36,9 +44,62 @@ label {
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
+  font-size: 1rem;
   transition: background-color 0.2s ease;
 
   &:hover {
     background-color: #1565c0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .fermentation-form {
+    padding: 0.7rem;
+    border-radius: 10px;
+    max-width: 98vw;
+  }
+  .form-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.7rem;
+  }
+  label {
+    font-size: 0.85rem;
+    input {
+      font-size: 0.85rem;
+      padding: 0.4rem;
+      border-radius: 7px;
+    }
+  }
+  .submit-btn {
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .fermentation-form {
+    padding: 0.4rem;
+    border-radius: 7px;
+    max-width: 100vw;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  label {
+    font-size: 0.8rem;
+    input {
+      font-size: 0.8rem;
+      padding: 0.3rem;
+      border-radius: 6px;
+    }
+  }
+  .submit-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 7px;
+    width: 100%;
   }
 }

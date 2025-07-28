@@ -49,6 +49,7 @@
     padding: 4px 8px;
     border-radius: 4px;
     font-weight: 500;
+    white-space: nowrap;
   }
 
   .history-card-value {
@@ -63,6 +64,75 @@
       padding: 2px 6px;
       border-radius: 4px;
       margin-left: 4px;
+    }
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .history-card {
+    padding: 14px 12px;
+    border-radius: 10px;
+    gap: 6px;
+
+    .history-card-header {
+      gap: 6px;
+    }
+    .history-card-sensor {
+      font-size: 0.95rem;
+      gap: 6px;
+      &::before {
+        width: 7px;
+        height: 7px;
+      }
+    }
+    .history-card-date {
+      font-size: 0.8rem;
+      padding: 3px 6px;
+      border-radius: 3px;
+    }
+    .history-card-value {
+      font-size: 0.92rem;
+      span {
+        font-size: 0.92rem;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .history-card {
+    padding: 8px 5px;
+    border-radius: 7px;
+    gap: 4px;
+
+    .history-card-header {
+      gap: 4px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .history-card-sensor {
+      font-size: 0.85rem;
+      gap: 4px;
+      &::before {
+        width: 6px;
+        height: 6px;
+      }
+    }
+    .history-card-date {
+      font-size: 0.75rem;
+      padding: 2px 4px;
+      border-radius: 2px;
+    }
+    .history-card-value {
+      font-size: 0.85rem;
+      span {
+        font-size: 0.85rem;
+        padding: 1px 4px;
+        border-radius: 2px;
+      }
     }
   }
 }
