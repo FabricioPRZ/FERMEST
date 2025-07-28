@@ -23,7 +23,7 @@ export class WebsocketService {
 
     this.isConnecting = true;
     this.ws = new WebSocket(
-      `https://fermest-wsc.it2id.cc/ws?user_id=${this.userId}&session_id=${this.sessionId}`
+      `wss://fermest-wsc.it2id.cc/ws?user_id=${this.userId}&session_id=${this.sessionId}`
     );
 
     this.ws.onopen = () => {
