@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class WebsocketService {
+@Injectable({ providedIn: 'root' })
+export class NotificationService1 {
   private ws!: WebSocket;
   private isConnected = false;
   private isConnecting = false;
