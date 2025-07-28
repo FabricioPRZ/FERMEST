@@ -7,16 +7,17 @@ export type DeviceId =
 
 @Injectable({ providedIn: 'root' })
 export class CommandService {
-  constructor(private ws: WebsocketService) {}
+  constructor(private ws: WebsocketService) { }
 
   switch(device: DeviceId, on: boolean): void {
     const payload = {
-      id_user: this.ws.userId,
+      id_user: this.ws.userId,  // ✅ ya accesible
       device,
       state: on ? 'encendido' : 'apagado'
     };
-    
-    this.ws.send(payload);  // 🔴 Este mensaje va directo al WebSocket, y por tanto, al ESP32
+
+    this.ws.send(payload);
     console.log('▶️ Mensaje enviado al ESP32:', payload);
   }
 }
+
