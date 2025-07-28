@@ -22,7 +22,7 @@ export class NotificationService1 {
 
     this.isConnecting = true;
     this.ws = new WebSocket(
-      `https://18.233.248.203:8082/ws?user_id=${this.userId}&session_id=${this.sessionId}&code=${this.code}`
+      `wss://18.233.248.203:8082/ws?user_id=${this.userId}&session_id=${this.sessionId}&code=${this.code}`
     );
 
     this.ws.onopen = () => {
