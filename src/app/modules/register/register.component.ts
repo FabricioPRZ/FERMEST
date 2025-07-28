@@ -38,12 +38,6 @@ export class RegisterComponent {
     return nameRegex.test(name);
   }
 
-  // Función para validar contraseña (mínimo 8 caracteres, al menos una mayúscula, una minúscula y un número)
-  isValidPassword(password: string): boolean {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-    return passwordRegex.test(password);
-  }
-
   // Función para validar email
   isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -77,12 +71,6 @@ export class RegisterComponent {
     // Validación de email
     if (!this.isValidEmail(this.email)) {
       this.errorMessage = 'Por favor ingrese un correo electrónico válido';
-      return;
-    }
-
-    // Validación de contraseña
-    if (!this.isValidPassword(this.password)) {
-      this.errorMessage = 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número';
       return;
     }
 
