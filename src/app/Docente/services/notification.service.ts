@@ -23,7 +23,7 @@ export class NotificationService1 {
 
     try {
       this.ws = new WebSocket(
-        `wss://fermest-wsc.it2id.cc/ws?user_id=${this.userId}&session_id=${this.sessionId}`
+        `wss://fermest-ws.it2id.cc/ws?user_id=${this.userId}&session_id=${this.sessionId}`
       );
 
       this.ws.onopen = () => {
